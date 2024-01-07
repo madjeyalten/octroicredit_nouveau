@@ -1,0 +1,151 @@
+.menu-bar {
+    padding: 4px 10px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 3;
+}
+
+div.logo {
+    font-family: Dosis;
+    font-size: 32px;
+}
+
+.search-cover {
+    border-radius: 2px;
+    overflow: hidden;
+    height: 42px;
+}
+
+.search-cover form input {
+    width: 100%;
+    height: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #FFF;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    border-radius: 3px 0 0 3px;
+}
+
+.search-cover form select {
+    border: none !important;
+    height: 40px;
+    font-size: 13px;
+    margin-left: -2px;
+    outline: none;
+    border-radius: 0 !important;
+    width: 130px;
+}
+
+.search-cover form button {
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: 0 3px 3px 0;
+    margin-left: -3px;
+    font-size: 13px;
+}
+
+.font-size-14 {
+    font-size: 14px !important;
+}
+
+.font-size-13 {
+    font-size: 13px !important;
+}
+
+.article-carousel-price {
+    color: #d11709;
+    font-family: Dosis;
+    margin-top: 130px;
+    font-weight: bold;
+    text-shadow: 0 0 1px #000;
+    font-size: 46px;
+}
+
+.article-carousel-title {
+    font-family: Dosis;
+}
+
+.article-carousel-text {
+    font-family: Dosis;
+}
+
+.article-item-price {
+    font-family: Dosis;
+}
+
+.xs-show {
+    display: none;
+}
+
+.customized-col {
+    padding: 15px;
+}
+
+.Marmelad {
+    font-family: Marmelad;
+}
+
+.Gayathri {
+    font-family: Gayathri;
+}
+
+.Dosis {
+    font-family: Dosis;
+}
+
+.Jura {
+    font-family: Jura;
+}
+
+@font-face {
+    src: url(../../fonts/Dosis/Dosis-VariableFont:wght.ttf);
+    font-family: Dosis;
+}
+
+@font-face {
+    src: url(../../fonts/Gayathri/Gayathri-Bold.ttf);
+    font-family: Gayathri;
+}
+
+@font-face {
+    src: url(../../fonts/Jura/Jura-VariableFont:wght.ttf);
+    font-family: Jura;
+}
+
+@font-face {
+    src: url(../../fonts/Marmelad/Marmelad-Regular.ttf);
+    font-family: Marmelad;
+}
+
+@media (max-width : 720px) {
+    .xs-hide {
+        display: none;
+    }
+    .xs-show {
+        display: block;
+    }
+    .article-carousel-price {
+        margin-top: 200px;
+        font-size: 40px;
+    }
+    .article-carousel-title {
+        font-size: 40px;
+    }
+    
+    .article-carousel-text {
+        font-size: 18px;
+    }
+    .customized-col {
+        padding: 5px;
+    }
+    div.logo {
+        font-size: 22px;
+    }
+    
+}

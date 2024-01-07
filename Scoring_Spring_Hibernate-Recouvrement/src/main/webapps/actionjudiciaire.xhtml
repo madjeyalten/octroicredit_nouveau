@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+        <title>Recouvrement</title>
+        <link rel="stylesheet" href="assets/mdb/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="assets/mdb/css/mdb.min.css"></link>
+         <link rel="stylesheet" href="assets/css/timeline.css"></link>
+        <link rel="stylesheet" href="assets/css/icofont/icofont.min.css"></link>
+        <link rel="stylesheet" href="assets/css/style.css"></link>
+        <link rel="stylesheet" href="assets/mdb/css/addons/datatables.min.css"></link>
+        <link rel="stylesheet" href="assets/mdb/css/addons/datatables-select.min.css"></link>
+   </h:head>
+   
+   <style>
+   
+       .ui-widget-overlay {
+    background: rgba(0,0,0,0.54);
+    opacity: .80;
+    filter: Alpha(Opacity=80);
+}
+    .dateStyle{
+    width: 60%;
+    }
+    
+   .ui-fileupload-content .ui-progressbar {
+    width: 0px;
+    height: 0px;
+    margin: 0
+    }
+        .sous-parametre, .sous-relance {
+            display: none;
+        }
+
+        .ui-dialog.ui-widget-content {
+            max-width: 850px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .ui-dialog.ui-widget-content .ui-dialog-title {
+            font-size: 16px;
+        }
+    </style>
+
+  <h:body>
+
+        <div>
+           <ui:include src="menuRecouvrementSideBar.xhtml"></ui:include>
+            <div class="wrap-content font-size-14">
+                <ui:include src="menuRecouvrementAppBar.xhtml"></ui:include>
+                <br />
+
+              
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="header mb-2">
+                                    <span class="h3">Liste des dossiers</span> -
+                                    <span class="h5">Dossiers en contentieux</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="border-bottom border-primary"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <h:form id="dossierTable">
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    <label for="" class="mb-0 mt-2"><b class="font-weight-bold">Status</b></label>
+												<h:selectOneListbox id="basic" styleClass="custom-select form-control"
+													value="#{alertBean.statutType}" size="1">
+													<f:selectItem itemLabel="" itemValue="Vide" />
+													<f:selectItem itemLabel="A traiter" itemValue="A traiter" />
+													<f:selectItem itemLabel="Non assigné"
+														itemValue="Non assigne" />
+													<f:selectItem itemLabel="à transférer"
+														itemValue="A transferer" />
+												</h:selectOneListbox>
+                                                </div>
+                                            </td>
+                                        
+                                            <td width="100" class="pl-1" style="padding-top: 15px;">
+                                            <p:commandButton value="Rechercher" update="tablegroupe" actionListener="#{alertBean.search}" oncomplete="recharger()" style="background: #1976d2; padding: 9px 12px;" styleClass="btn btn-blue btn-md z-depth-0 font-size-14 m-0 btn-block rounded">
+                                            </p:commandButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                            
+                          
+                               <h:panelGroup id="tablegroupe">
+                                <h:form>
+                                <table id="dt-basic-datatable" class="table table-striped table-sm table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th width="50" class="text-center">N°</th>
+                                            <th class="th-sm">
+                                                Nom du client
+                                            </th>
+                                            <th class="th-sm">
+                                                Date de mise en contentieux
+                                            </th>
+                                            <th class="th-sm">
+                                                Statut
+                                            </th>
+                                            <th class="th-sm">
+                                                Documents
+                                            </th>
+                                            <th  class="text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                      <ui:repeat var="value" value="#{alertBean.listDossiercontentieux}">
+                                    <tr data-value="#{value.dossierrecouvrement.identifiant}">
+                                            <td>#{value.dossierrecouvrement.identifiant}</td>
+                                            <td>#{value.dossierrecouvrement.client.nomPrenom}</td>
+                                            <td>#{alertBean.formateDateContentieux(value)}</td>
+                                            <td>#{value.status}</td>
+                                            <td>
+                                            <p:commandButton value="Télécharger"  actionListener="#{alertBean.downloadActionJudiciaire(value)}" onclick="PrimeFaces.monitorDownload(start, stop);" styleClass="btn btn-sm pl-3 pr-3 add-intervanant z-depth-0" rendered="#{not empty value.fileName}">
+                                            <p:fileDownload value="#{alertBean.fileDownload}"/>
+                                            </p:commandButton> 
+                                            </td>
+                                            <td width="390" class="text-center">
+                                                <p:commandLink value="+ Action judiciare" actionListener="#{alertBean.showActionjudiciareDialog(value)}"  styleClass="btn btn-sm pl-3 pr-3 add-intervanant z-depth-0" update="form2">
+                                                </p:commandLink>
+                                                &nbsp;
+                                                <p:commandLink value="Voir les actions judiciaires" actionListener="#{alertBean.showListActionjudiciareDialog(value)}"  styleClass="btn btn-sm pl-3 z-depth-0 pr-3 add-reglement" update="form3" disabled="#{empty value.flagactionjudiciaire}">
+                                                </p:commandLink>
+                                                &nbsp;                                             
+                                            </td>
+                                        </tr>
+                                    </ui:repeat>  
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th width="50" class="text-center">N°</th>
+                                             <th class="th-sm">
+                                                Nom du client
+                                            </th>
+                                            <th class="th-sm">
+                                                Date de mise en contentieux
+                                            </th>
+                                            <th class="th-sm">
+                                                Statut
+                                            </th>
+                                            <th class="th-sm">
+                                                Documents
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                 </h:form>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                       
+
+
+                        <div class="row">
+                            <div class="col-12 text-right">
+                               
+                            </div>
+                          
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+           <h:form id="form2"> 
+           <p:messages closable="true" showDetail="true"></p:messages>
+         <p:dialog header="Ajouter une action judiciare"  widgetVar="actionjudiciareDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" position="top">		 
+    <h:panelGrid id="grid" columns="3"> 
+             <p:outputLabel id="numeroDossier" value="Numéro du dossier :"/>
+             <h:outputText value="#{alertBean.dossiercontentieuxSelected.dossierrecouvrement.identifiant}"></h:outputText>
+           <br></br>
+           <br></br>
+             <p:outputLabel id="nomClient" value="Nom du client :"/>
+             <h:outputText value="#{alertBean.dossiercontentieuxSelected.dossierrecouvrement.client.nomPrenom}"></h:outputText>
+            <br></br>
+           <br></br>
+        <p:outputLabel id="type" value="Type d'action :" /> 
+												<h:selectOneListbox id="basic" styleClass="custom-select font-size-14 m-1" requiredMessage="Veuillez sélectionner une action"
+													value="#{alertBean.typeActionjudiciare}" size="1"
+													style="width:60%;" required="true">
+													<f:selectItem   itemLabel="sélectionner un type d'action" noSelectionOption="true" />
+													<f:selectItem   itemLabel="Injonction de payer" itemValue="Injonction de payer" />
+													<f:selectItem   itemLabel="Opposition à l’Injonction de payer" itemValue="Opposition à l’Injonction de payer" />
+													<f:selectItem   itemLabel="Convocation" itemValue="Convocation" />
+													<f:selectItem   itemLabel="Appel" itemValue="Appel" />
+													<f:selectItem   itemLabel="Injonction de payer" itemValue="Injonction de payer" />
+													<f:selectItem   itemLabel="Dépôt auprès du Juge avec ou sans Avocat" itemValue="Dépôt auprès du Juge avec ou sans Avocat" />
+													<f:selectItem   itemLabel="Appel suite au dépôt auprès du Juge" itemValue="Appel suite au dépôt auprès du Juge" /> 
+												</h:selectOneListbox>
+         <br></br>
+           <br></br>
+             <p:outputLabel id="dateAction" value="Date de l'action :"/>
+             <p:calendar value="#{alertBean.dateActionjudiciare}" inputStyleClass="dateStyle"></p:calendar>
+            <br></br>
+           <br></br>
+           <p:outputLabel id="fichier" value="Choisir un fichier :"/>
+           <p:fileUpload value="#{alertBean.file}" mode="advanced" skinSimple="true" label="Choisir un fichier" cancelLabel="Annuler" uploadLabel="Charger" fileUploadListener="#{alertBean.handleFileUpload}" previewWidth="30"/>
+           <br></br>
+           <br></br>
+           <p:outputLabel id="commentairejudiciaire" value="Commentaire :"/>
+             <h:inputTextarea value="#{alertBean.commentaireActionjudiciare}" maxlength="50" style="height:100px;width:400px;"></h:inputTextarea>
+             
+    </h:panelGrid>  
+           <br></br>
+      <h:commandButton id="submitButton" value="Ajouter"   style="background: #1976d2;" styleClass="btn btn-blue btn-md white-text" action="#{alertBean.ajouterActionJudiciaire()}" oncomplete="PF('actionjudiciareDialog').hide()" update="dossierTable"/>
+           </p:dialog>
+    </h:form>     
+    
+    
+     <h:form id="form3"> 
+           <p:messages closable="true"></p:messages>
+         <p:dialog header="Les actions judiciares du dossier" widgetVar="actionListjudiciareDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" position="top">			 
+            <table width="100%">
+                <ui:repeat var="action" value="#{alertBean.listActionjudiciare}">
+                    <tr>
+                        <td class="pb-2 font-size-14">
+                            <i class="icofont-history red-text"></i>
+                            <small>Date d'action</small>
+                        </td>
+                        <td class="text-right font-size-14">
+                        <h:outputText value="#{action.dateaction}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+                </h:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="pb-2 font-size-14">
+                            <b>Type d'action</b>
+                        </td>
+                        <td class="text-right font-size-14">
+                            <b><span>#{action.typeaction}</span></b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <i class="icofont-comment blue-text"></i>
+                            <span class="text-muted">Commentaire</span>
+        
+                            <div class="mt-1 mb-3 border-bottom font-size-13">
+                                #{action.commentaire}
+                            </div>
+                        </td>
+                    </tr> 
+                </ui:repeat> 
+            </table>
+           <br></br>
+        </p:dialog>
+    </h:form>  
+
+
+
+        
+        
+        <!-- Modal -->
+    <ui:include src="modalInfo.xhtml"></ui:include>
+        
+    <ui:include src="modalArelancer.xhtml"></ui:include>
+    <ui:include src="modalcourrier.xhtml"></ui:include>
+
+<!--         <script src="assets/mdb/js/jquery.min.js"></script> -->
+        <script src="assets/mdb/js/popper.min.js"></script>
+        <script src="assets/mdb/js/bootstrap.min.js"></script>
+        <script src="assets/mdb/js/mdb.min.js"></script>
+        <script src="assets/mdb/js/addons/datatables.min.js"></script>
+        <script src="assets/mdb/js/addons/datatables-select.min.js"></script>
+        
+        <script>
+        function recharger(){
+        	 $('#dt-basic-checkbox').dataTable({
+             	select: {
+                     style: 'multi'
+                 },
+       		  "language": {
+       		    "paginate": {
+       		      "previous": "Précédent",
+       		      "next":     'Suivant'
+       		    },
+       	       "sSearch": "Rechercher",
+       	       "sLengthMenu": "Afficher _MENU_ enregistrement",
+       	       "info": "Afficher _START_ à _TOTAL_ enregistrement"
+       		  },
+                 columnDefs: [{
+                     orderable: false,
+                     className: 'select-checkbox',
+                     targets: 0
+                 }],
+                     select: {
+                     style: 'os',
+                     selector: 'td:first-child'
+                 }
+             });	
+        }
+        </script>
+        
+            <script>
+            $(document).ready(function (params) {
+                $('#dt-basic-datatable').dataTable();
+                
+                
+                $('#dt-basic-checkbox tbody').on( 'click', 'tr', function () {
+                    $(this).toggleClass('selected');
+                    if ($(this).hasClass('selected')) {
+                        var old_value = $('#selectDossierForm\\:idDossierSelectContentieux').val();
+                        $('#selectDossierForm\\:idDossierSelectContentieux').val(old_value + $(this).attr("data-value") + ",");
+                        console.log($('#selectDossierForm\\:idDossierSelectContentieux').val());
+                    } else {
+                        var index = $('#selectDossierForm\\:idDossierSelectContentieux').val().indexOf($(this).attr("data-value"));
+                        var new_value = $('#selectDossierForm\\:idDossierSelectContentieux').val().substring(0, index) + "" + $('#selectDossierForm\\:idDossierSelectContentieux').val().substring(index + 2);
+                        $('#selectDossierForm\\:idDossierSelectContentieux').val(new_value);
+
+                        console.log($('#selectDossierForm\\:idDossierSelectContentieux').val());
+                    }
+                });
+
+                $('.add-reglement-trigger').click(function () {
+                    $('.draggable-container-reglement').fadeIn();
+                });
+
+                $('.add-intervenant-trigger').click(function () {
+                    $('.draggable-container-intervenant').fadeIn();
+                });
+
+                $('.close-intervenant').click(function() {
+                    $('.draggable-container-intervenant').fadeOut();
+                });
+
+                $('.close-reglement').click(function() {
+                    $('.draggable-container-reglement').fadeOut();
+                });
+
+                $('.relance-trigger').click(function() {
+                    $('.sous-relance').slideToggle();
+                });
+
+                $('.parametre-trigger').click(function() {
+                    $('.sous-parametre').slideToggle();
+                });
+            });
+        </script>
+        
+
+
+        
+    </h:body>
+</html>

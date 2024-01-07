@@ -1,0 +1,8 @@
+#Thu Oct 06 16:55:09 CEST 2016
+WARNING=DO NOT MODIFY THIS FILE IF YOU DON'T UNDERSTAND
+defaultDestination=@src/main/webapp
+defaultVariables=
+eclipse.preferences.version=1
+includeTeamPrivateFiles=false
+map|0=src|,|,|,|,
+useCurrentDateForDestinationFiles=false

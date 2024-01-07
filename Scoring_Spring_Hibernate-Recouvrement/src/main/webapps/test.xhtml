@@ -1,0 +1,252 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+</style>
+<title>Adminizio Lite</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<script type="text/javascript" src="js/switcher.js"></script>
+<script type="text/javascript" src="js/toggle.js"></script>
+<script type="text/javascript" src="js/ui.core.js"></script>
+<script type="text/javascript" src="js/ui.tabs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tabs > ul").tabs();
+	});
+	</script>
+	
+</h:head>
+
+<body>
+<div id="main">
+  <!-- Tray -->
+  <div id="tray" class="box">
+    <p class="f-left box">
+      <!-- Switcher -->
+      <span class="f-left" id="switcher"> <a href="javascript:void(0);" rel="1col" class="styleswitch ico-col1" title="Display one column"><img src="design/switcher-1col.gif" alt="1 Column" /></a> <a href="javascript:void(0)" rel="2col" class="styleswitch ico-col2" title="Display two columns"><img src="design/switcher-2col.gif" alt="" /></a> </span> Crédit: <strong>Octroi de crédit</strong> </p>
+    <p class="f-right">Utilisateur: <strong><a href="#">Madjey Mensah</a></strong> <strong><a href="#" id="logout">Déconnexion</a></strong></p>
+  </div>
+  <!--  /tray -->
+  <hr class="noscreen" />
+  <!-- Menu -->
+  <div id="menu" class="box">
+    <ul class="box f-right">
+      <li><a href="#"><span><strong>Visiter notre site</strong></span></a></li>
+    </ul>
+    <ul class="box">
+      <li id="menu-active"><a href="#"><span>Paramétrer les scores</span></a></li>
+      <!-- Active -->
+      <li><a href="#"><span>Scoring</span></a></li>
+      <li><a href="#"><span>Fiche Client</span></a>
+      </li>
+      <li><a href="#"><span>Recherche Client</span></a></li>
+      <li><a href="#"><span>Simulation</span></a></li>
+      <li><a href="#"><span>Mes Tâches</span></a></li>
+      <li><a href="#"><span>Utilisateur</span></a></li>
+      <li><a href="#"><span>Quitter</span></a></li>
+    </ul>
+  </div>
+  <!-- /header -->
+  <hr class="noscreen" />
+  <!-- Columns -->
+  <div id="cols" class="box">
+    <!-- Aside (Left Column) -->
+    <div id="aside" class="box">
+      <div class="padding box">
+        <!-- Logo (Max. width = 200px) -->
+        <p id="logo"><a href="#"><img src="tmp/logo.gif" alt="" /></a></p>
+        <!-- Search -->
+        <h:form style="width:800px;">
+        <fieldset>
+          <legend>Recherche client</legend>
+          <p>
+            <input type="text" size="17" name="" class="input-text" />
+            <input type="submit" value="OK" class="input-submit-02" />
+            <br />
+            <a href="javascript:toggle('search-options');" class="ico-drop">Recherche avancée</a></p>
+          <!-- Advanced search -->
+          <div id="search-options" style="display:none;">
+            <p>
+              <label>
+              <input type="checkbox" name="" checked="checked" />
+              Par nom.</label>
+              <br />
+              <label>
+              <input type="checkbox" name="" />
+              Par prénom.</label>
+              <br />
+              <label>
+              <input type="checkbox" name="" />
+              Par numéro de client.</label>
+            </p>
+          </div>
+          <!-- /search-options -->
+          </fieldset>
+       </h:form>
+        <!-- Create a new project -->
+        <p id="btn-create" class="box"><a href="#"><span>Nouveau client</span></a></p>
+      </div>
+      <!-- /padding -->
+      <ul class="box">
+        <li><a href="#">Paramétrage</a></li>
+        <li><a href="#">Utilisateur</a></li>
+        <li><a href="#">Mes tâches</a></li>
+        <li id="submenu-active"><a href="#">Fiche client</a>
+          <!-- Active -->
+          <ul>
+            <li><a href="#">Scoring</a></li>
+            <li><a href="#">Simulation</a></li>
+            <li><a href="#">Octroi</a></li>
+            <li><a href="#">Edition du contrat</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Notification</a>
+          <ul>
+            <li><a href="#">Envoi courrier</a></li>
+            <li><a href="#">Envoi mail</a></li>
+            <li><a href="#">Envoi SMS</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /aside -->
+    <hr class="noscreen" />
+    <!-- Content (Right Column) -->
+    <div id="content" class="box">
+      <h3 class="tit">Informations client</h3>
+      <br></br>
+      
+      <h:form>
+      <p:wizard  backLabel="Etape précédente" nextLabel="Etape suivante" style="width:800px;" flowListener="#{scoringBean.onFlowProcess}">
+        <p:tab id="etatCivil" title="Etat civil" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Etat civil">
+                <p:messages />
+                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                    <h:outputText style="font-size: 15;" value="Nom: *" />
+                    <p:inputText styleClass="input-text" value="#{scoringBean.nomClient}" required="true" requiredMessage="Veuillez saisir le nom" label="Nom"/>
+                    <h:outputText style="font-size: 15;" value="Prenom: *" />
+                    <p:inputText value="#{scoringBean.prenomClient}" required="true" requiredMessage="Veuillez saisir le prenom" label="Prenom"/>
+ 
+                    <h:outputText style="font-size: 15;" value="Date de naissance	: " />
+                    <p:calendar value="#{scoringBean.dateNaissance}" />
+                    
+                     <h:outputText style="font-size: 15;" value="Commune de naissance: *" />
+                    <p:inputText value="#{scoringBean.communeNaissance}" required="true" requiredMessage="Veuillez saisir la commune de naissance" label="Commune"/>
+                    <h:outputText style="font-size: 15;" value="Situation de famille: *" />
+                    <p:inputText value="#{scoringBean.situationFamilial}" required="true" requiredMessage="Veuillez saisir la situation familiale" label="Situation"/>
+                    <h:outputText style="font-size: 15;" value="Nombre d'enfants: *" />
+                    <p:inputText value="#{scoringBean.nombreEnfant}" required="true" requiredMessage="Veuillez saisir le nombre d'enfant" label="Enfants"/>
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+         <p:tab id="Adresse" title="Adresse" titleStyle="height:20px;font-size: 12px" closable="true">
+            <p:panel header="Adresse">
+                <p:messages />
+                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                    <h:outputText style="font-size: 15;" value="Numéro et nom de la voie: *" />
+                    <p:inputText value="#{scoringBean.adresseRue}" size="40" required="true" requiredMessage="Veuillez saisir l'adresse" label="Adresse"/>
+                    <h:outputText style="font-size: 15;" value="Code postal: *" />
+                    <p:inputText value="#{scoringBean.adressecodePostal}" required="true" requiredMessage="Veuillez saisir le code postal" label="Code postal"/>
+                    <h:outputText style="font-size: 15;" value="Pays	: " />
+                    <p:inputText value="#{scoringBean.adressePays}" />        
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+         <p:tab id="Coordonnes" title="Coordonnées" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Coordonnées">
+                <p:messages />
+                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                    <h:outputText style="font-size: 15;" value="Téléphone domicile: *" />
+                    <p:inputText value="#{scoringBean.telephoneDomicile}" requiredMessage="Veuillez saisir le téléphone domicile" label="Adresse"/>
+                    <h:outputText style="font-size: 15;" value="Téléphone portable: *" />
+                    <p:inputText value="#{scoringBean.telephonePortable}" required="true" requiredMessage="Veuillez saisir le téléphone portable" label="Code postal"/>
+                    <h:outputText style="font-size: 15;" value="Email	: " />
+                    <p:inputText value="#{scoringBean.email}" />        
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        <p:tab id="DonnesCommerciales" title="Données commerciales" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Données commerciales">
+                <p:messages />
+                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                    <h:outputText style="font-size: 15;" value="Profession: *" />
+                    <p:inputText value="#{scoringBean.profession}" requiredMessage="Veuillez saisir la profession"/>
+                    <h:outputText style="font-size: 15;" value="Nom employeur: " />
+                    <p:inputText value="#{scoringBean.nomEmployeur}" required="true"/>
+                    <h:outputText style="font-size: 15;" value="Type de contrat	: " />
+                    <p:inputText value="#{scoringBean.typeContrat}" />
+                    <h:outputText style="font-size: 15;" value="Ancienneté	: " />
+                    <p:inputText value="#{scoringBean.anciennete}" /> 
+                    <h:outputText style="font-size: 15;" value="Mode d'habitation	: " />
+								<h:selectOneListbox  value="#{scoringBean.modeHabitation}"
+									requiredMessage="Veuillez saisir le mode d'habitation" size="1">
+									<f:selectItem itemLabel="" itemValue="vide" />
+									<f:selectItem itemLabel="Propriétaire" itemValue="PROP" />
+									<f:selectItem itemLabel="Locataire" itemValue="LOC" />
+								</h:selectOneListbox>
+					<h:outputText style="font-size: 15;" value="Revenu	: " />
+                    <p:inputText value="#{scoringBean.revenuPension}" /> 
+                    <h:outputText style="font-size: 15;" value="Loyer	: " />
+                    <p:inputText value="#{scoringBean.chargeLoyer}" /> 
+                     <h:outputText styleClass="input-text" value="Prêt 1 en cours	: " />
+                    <p:inputText value="#{scoringBean.chargePremierPret}"/> 
+                     <h:outputText style="font-size: 15;" value="Prêt 2 en cours	: " />
+                    <p:inputText value="#{scoringBean.chargeDeuxiemePret}"/> 
+				</h:panelGrid>
+            </p:panel>
+            <br></br>
+        </p:tab>
+       </p:wizard>
+       <br></br>
+        <br></br>
+       <div style="border:1px solid #74D0F1; background:#74D0F1; width: 800">
+       </div>
+        <div style="width: 800">
+        <br></br>
+          <center>
+        <p:commandButton value="Créer dossier" actionListener="#{scoringBean.createFolder}"  styleClass="btn btn-primary"></p:commandButton>
+        </center>
+         </div>
+       </h:form>
+    </div>
+    <!-- /content -->
+  </div>
+  <!-- /cols -->
+  <hr class="noscreen" />
+  <!-- Footer -->
+  <div id="footer" class="box">
+    <p class="f-right">Développé par <a href="http://www.test.com/">Octroi de crédit</a></p>
+  </div>
+  <!-- /footer -->
+</div>
+<!-- /main -->
+</body>
+</html>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<title>Adminizio Lite</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/switcher.js"></script>
+<script type="text/javascript" src="js/toggle.js"></script>
+<script type="text/javascript" src="js/ui.core.js"></script>
+<script type="text/javascript" src="js/ui.tabs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tabs > ul").tabs();
+	});
+	</script>	
+<script type="text/javascript">
+var currentEvent;
+  $(document).ready(function() {
+  PrimeFaces.widget.ContextMenu.prototype.show = function(e) {
+     //hide other contextmenus if any
+     $(document.body).children('.ui-contextmenu:visible').hide();
+
+     if(e) {
+        currentEvent = e;
+     } 
+
+     var win = $(window),
+     left = e.pageX,
+     top = e.pageY,
+     width = this.jq.outerWidth(),
+     height = this.jq.outerHeight();
+
+     //collision detection for window boundaries
+     if((left + width) > (win.width())+ win.scrollLeft()) {
+        left = left - width;
+     }
+     if((top + height ) > (win.height() + win.scrollTop())) {
+        top = top - height;
+     }
+
+     if(this.cfg.beforeShow) {
+        this.cfg.beforeShow.call(this);
+     }
+
+     this.jq.css({
+        'left': left,
+        'top': top,
+        'z-index': ++PrimeFaces.zindex
+     }).show();
+
+     e.preventDefault(); 
+  };
+});
+</script>
+
+    <!-- Bootstrap -->
+<!--     <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/> -->
+    <!-- Font Awesome -->
+<!--     <link href="./vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/> -->
+    <!-- NProgress -->
+<!--     <link href="./vendors/nprogress/nprogress.css" rel="stylesheet"/> -->
+    
+    <!-- Custom Theme Style -->
+<!--     <link href="./build/css/custom.min.css" rel="stylesheet"/> -->
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Outils" icon="ui-icon-gear">
+						<p:menuitem value="Questionnaire" url="eligibilite.xhtml"/>
+						<p:menuitem value="Paramétrer les scores" url="scoring.xhtml"/>
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+
+					<p:submenu label="Client" icon="ui-icon-gear">
+							<p:menuitem value="Fiche client" url="dossier.xhtml"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+					
+					<p:submenu label="Crédit" icon="ui-icon-gear">
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+						<p:submenu label="Tâche" icon="ui-icon-gear">
+						<p:menuitem value="Mes tâches" url="tache.xhtml"/>
+					</p:submenu>
+
+					<p:menuitem value="Quitter"  actionListener="#{scoringBean.deconnect}"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{scoringBean.loginAndPassword}</p:outputLabel>
+					</f:facet>
+				</p:menubar>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab  title="Simulation">
+					<h:outputText value="Faire une simulation"/>
+				</p:tab>
+				<p:tab title="Score">
+					<h:outputText value="Paramétrer un score"/>
+				</p:tab>
+				<p:tab title="Crédit">
+					<h:outputText value="Simuler un crédit"/>
+				</p:tab>
+				<p:tab title="Tâches">
+					<h:outputText value="Mes tâches"/>
+				</p:tab>
+				<p:tab title="Tableau de bord">
+					<h:outputText value="Mes tableaux de bord"/>
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+		
+		<h:form style="width:800px;">
+                 
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+ 
+    <p:wizard  backLabel="Etape précédente" nextLabel="Etape suivante" style="width:800px;" flowListener="#{scoringBean.onFlowProcess}">
+        <p:tab id="etatCivil" title="Etat civil" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Etat civil">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Nom: *" />
+                    <p:inputText value="#{scoringBean.nomClient}" required="true" requiredMessage="Veuillez saisir le nom" label="Nom"/>
+                    <h:outputText value="Prenom: *" />
+                    <p:inputText value="#{scoringBean.prenomClient}" required="true" requiredMessage="Veuillez saisir le prenom" label="Prenom"/>
+ 
+                    <h:outputText value="Date de naissance	: " />
+                    <p:calendar value="#{scoringBean.dateNaissance}" />
+                    
+                     <h:outputText value="Commune de naissance: *" />
+                    <p:inputText value="#{scoringBean.communeNaissance}" required="true" requiredMessage="Veuillez saisir la commune de naissance" label="Commune"/>
+                    <h:outputText value="Situation de famille: *" />
+                    <p:inputText value="#{scoringBean.situationFamilial}" required="true" requiredMessage="Veuillez saisir la situation familiale" label="Situation"/>
+                    <h:outputText value="Nombre d'enfants: *" />
+                    <p:inputText value="#{scoringBean.nombreEnfant}" required="true" requiredMessage="Veuillez saisir le nombre d'enfant" label="Enfants"/>
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+         <p:tab id="Adresse" title="Adresse" titleStyle="height:20px;font-size: 12px" closable="true">
+            <p:panel header="Adresse">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Numéro et nom de la voie: *" />
+                    <p:inputText value="#{scoringBean.adresseRue}" size="40" required="true" requiredMessage="Veuillez saisir l'adresse" label="Adresse"/>
+                    <h:outputText value="Code postal: *" />
+                    <p:inputText value="#{scoringBean.adressecodePostal}" required="true" requiredMessage="Veuillez saisir le code postal" label="Code postal"/>
+                    <h:outputText value="Pays	: " />
+                    <p:inputText value="#{scoringBean.adressePays}" />        
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+         <p:tab id="Coordonnes" title="Coordonnées" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Coordonnées">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Téléphone domicile: *" />
+                    <p:inputText value="#{scoringBean.telephoneDomicile}" requiredMessage="Veuillez saisir le téléphone domicile" label="Adresse"/>
+                    <h:outputText value="Téléphone portable: *" />
+                    <p:inputText value="#{scoringBean.telephonePortable}" required="true" requiredMessage="Veuillez saisir le téléphone portable" label="Code postal"/>
+                    <h:outputText value="Email	: " />
+                    <p:inputText value="#{scoringBean.email}" />        
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        <p:tab id="DonnesCommerciales" title="Données commerciales" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Données commerciales">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Profession: *" />
+                    <p:inputText value="#{scoringBean.profession}" requiredMessage="Veuillez saisir la profession"/>
+                    <h:outputText value="Nom employeur: " />
+                    <p:inputText value="#{scoringBean.nomEmployeur}" required="true"/>
+                    <h:outputText value="Type de contrat	: " />
+                    <p:inputText value="#{scoringBean.typeContrat}" />
+                    <h:outputText value="Ancienneté	: " />
+                    <p:inputText value="#{scoringBean.anciennete}" /> 
+                    <h:outputText value="Mode d'habitation	: " />
+								<h:selectOneListbox value="#{scoringBean.modeHabitation}"
+									requiredMessage="Veuillez saisir le mode d'habitation" size="1">
+									<f:selectItem itemLabel="" itemValue="vide" />
+									<f:selectItem itemLabel="Propriétaire" itemValue="PROP" />
+									<f:selectItem itemLabel="Locataire" itemValue="LOC" />
+								</h:selectOneListbox>
+					<h:outputText value="Revenu	: " />
+                    <p:inputText value="#{scoringBean.revenuPension}" /> 
+                    <h:outputText value="Loyer	: " />
+                    <p:inputText value="#{scoringBean.chargeLoyer}" /> 
+                     <h:outputText value="Prêt 1 en cours	: " />
+                    <p:inputText value="#{scoringBean.chargePremierPret}"/> 
+                     <h:outputText value="Prêt 2 en cours	: " />
+                    <p:inputText value="#{scoringBean.chargeDeuxiemePret}"/> 
+				</h:panelGrid>
+            </p:panel>
+            <br></br>
+        </p:tab>
+       </p:wizard>
+       </h:form>
+       <h:form style="width:800px;">
+       <br></br>
+         <left>
+        <p:commandButton value="Créer dossierrrr" actionListener="#{scoringBean.createFolder}"  styleClass="btn btn-primary"></p:commandButton>
+        </left>
+       </h:form>
+	</p:layoutUnit>	
+	</p:layout>
+</h:body>
+
+</html>

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+</style>
+<script type="text/javascript">
+var currentEvent;
+  $(document).ready(function() {
+  PrimeFaces.widget.ContextMenu.prototype.show = function(e) {
+     //hide other contextmenus if any
+     $(document.body).children('.ui-contextmenu:visible').hide();
+
+     if(e) {
+        currentEvent = e;
+     } 
+
+     var win = $(window),
+     left = e.pageX,
+     top = e.pageY,
+     width = this.jq.outerWidth(),
+     height = this.jq.outerHeight();
+
+     //collision detection for window boundaries
+     if((left + width) > (win.width())+ win.scrollLeft()) {
+        left = left - width;
+     }
+     if((top + height ) > (win.height() + win.scrollTop())) {
+        top = top - height;
+     }
+
+     if(this.cfg.beforeShow) {
+        this.cfg.beforeShow.call(this);
+     }
+
+     this.jq.css({
+        'left': left,
+        'top': top,
+        'z-index': ++PrimeFaces.zindex
+     }).show();
+
+     e.preventDefault(); 
+  };
+});
+</script>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Outils" icon="ui-icon-gear">
+						<p:menuitem value="Questionnaire" url="eligibilite.xhtml"/>
+						<p:menuitem value="Paramétrer les scores" url="scoring.xhtml"/>
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+
+					<p:submenu label="Client" icon="ui-icon-gear">
+							<p:menuitem value="Fiche client" url="dossier.xhtml"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+					
+					<p:submenu label="Crédit" icon="ui-icon-gear">
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+						<p:submenu label="Tâche" icon="ui-icon-gear">
+						<p:menuitem value="Mes tâches" url="tache.xhtml"/>
+					</p:submenu>
+
+					<p:menuitem value="Quitter"  actionListener="#{scoringBean.deconnect}"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{scoringBean.loginAndPassword}</p:outputLabel>
+					</f:facet>
+				</p:menubar>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab  title="Simulation">
+					<h:outputText value="Faire une simulation"/>
+				</p:tab>
+				<p:tab title="Score">
+					<h:outputText value="Paramétrer un score"/>
+				</p:tab>
+				<p:tab title="Crédit">
+					<h:outputText value="Simuler un crédit"/>
+				</p:tab>
+				<p:tab title="Tâches">
+					<h:outputText value="Mes tâches"/>
+				</p:tab>
+				<p:tab title="Tableau de bord">
+					<h:outputText value="Mes tableaux de bord"/>
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+		
+		<h:form style="width:600px;">
+                 
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+
+            <p:panel header="Paramétrage des scores">
+                <p:messages />
+                <h:panelGrid columns="6" columnClasses="label, value">
+                    <h:outputText value="Homme" />
+                    <p:spacer width="30"></p:spacer>
+                    <h:outputText value="Score" />
+                    <p:spinner id="scoreHomme" value="#{scoringBean.scoreHomme}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanHomme}" />
+                    <h:outputText value="Femme" />
+                   <p:spacer width="30"></p:spacer>
+                    <h:outputText value="Score" />
+                    <p:spinner id="scoreFemme" value="#{scoringBean.scoreFemme}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanFemme}" />
+                     <h:outputText value="Ouvrier" />
+                    <p:spacer width="30"></p:spacer>
+                     <h:outputText value="Score" />
+                    <p:spinner id="scoreOuvrier" value="#{scoringBean.scoreOuvrier}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanOuvrier}" />
+                     <h:outputText value="Cadre" />
+                    <p:spacer width="30"></p:spacer>
+                     <h:outputText value="Score" />
+                    <p:spinner id="scoreCadre" value="#{scoringBean.scoreCadre}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanCadre}" />
+                     <h:outputText value="Fonction publique" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="scoreFonctionPublique" value="#{scoringBean.scoreFonctionPublique}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanFonctionPublique}" />
+                     <h:outputText value="Secteur privé" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="scoreSecteurPrive" value="#{scoringBean.scoreSecteurPrive}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanSecteurPrive}" />
+                     <h:outputText value="Célibataire" />
+                    <p:spacer width="30"></p:spacer>
+                     <h:outputText value="Score" />
+                    <p:spinner id="scoreCelibataire" value="#{scoringBean.scoreCelibataire}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanCelibataire}" />
+                    <h:outputText value="Marié" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="scoreMarie" value="#{scoringBean.scoreMarie}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanMarie}" />
+                    <h:outputText value="Locataire" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="scoreLocataire" value="#{scoringBean.scoreLocataire}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanLocataire}" />
+                     <h:outputText value="Propriétaire" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="scorePropriétaire" value="#{scoringBean.scorePropriétaire}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanPropriétaire}" />
+                    <h:outputText value="Revenu supérieur à 150.000 FCFA" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="revenuSup" value="#{scoringBean.revenuSup}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanRevenuSup}" />
+                     <h:outputText value="Revenu inférieur à 150.000 FCFA" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="revenuInf" value="#{scoringBean.revenuInf}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanRevenuInf}" />
+                    <h:outputText value="Nombre d'enfant supérieur à 2" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="nombreEnfantInf" value="#{scoringBean.nombreEnfantInf}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanEnfantInf}" />
+                    <h:outputText value="Nombre d'enfant supérieur à 2" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="nombreEnfantSup" value="#{scoringBean.nombreEnfantSup}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanEnfantSup}" />
+                     <h:outputText value="Moins de 30 ans" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="ageInf" value="#{scoringBean.ageInf}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanAgeInf}" />
+                    <h:outputText value="Plus de 30 ans" />
+                     <p:spacer width="30"></p:spacer>
+                      <h:outputText value="Score" />
+                    <p:spinner id="ageSup" value="#{scoringBean.ageSup}" stepFactor="5"/>
+                    <h:outputText value="Actif" />
+                    <h:selectBooleanCheckbox value="#{scoringBean.actifBooleanAgeSup}" />
+                </h:panelGrid>
+            </p:panel>
+            <br></br>
+            <p:commandButton  value="Enregistrer les scores" action="#{scoringBean.createScore}" styleClass="submitButton"/>
+            <p:commandButton  value="Abandonner" styleClass="submitButton"/>
+            <br></br>	
+       </h:form>
+       <h:form style="height:40px;width:800px;">
+       </h:form>
+	</p:layoutUnit>	
+	</p:layout>
+</h:body>
+
+</html>

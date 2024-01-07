@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+	.
+	old
+	{
+	background
+	:
+	red;
+}
+
+}
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+.patientStyle {
+background:red;
+}
+</style>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Depense" icon="ui-icon-document">
+						<p:menuitem value="Reccurente" url="newDepenseCourante.xhtml" icon="ui-icon-search" />
+						<p:menuitem value="Exceptionnelle" url="newDepenseException.xhtml" icon="ui-icon-newwin" />
+						<p:separator />
+						<p:menuitem value="Quit" url="#" />
+					</p:submenu>
+
+					<p:submenu label="Revenu" icon="ui-icon-pencil">
+						<p:menuitem value="Reccurent" url="newRevenuCourante.xhtml"
+							icon="ui-icon-arrowreturnthick-1-w" />
+						<p:menuitem value="Exceptionnel" url="newRevenuException.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
+					</p:submenu>
+
+					<p:submenu label="Outils" icon="ui-icon-help">
+						<p:menuitem value="Tableau de bord" url="#" />
+					</p:submenu>
+
+					<p:submenu label="Simulation" icon="ui-icon-gear">
+							<p:menuitem value="Simuler le solde" actionListener="#{menuBean.save}"
+								icon="ui-icon-disk" update="messages" />
+								<p:menuitem value="Solde futur" actionListener="#{menuBean.save}"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+
+					<p:menuitem value="Quit" url="#"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{depenseCouranteBean.loginAndPassword}</p:outputLabel>
+						<p:commandButton type="button" value="Déconnexion"
+							actionListener="#{depenseCouranteBean.deconnect}" icon="ui-icon-extlink" />
+					</f:facet>
+				</p:menubar>
+			</h:form>
+		</p:layoutUnit>
+		
+		<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab title="Simulation">
+					<h:outputText value="Faire une simulation" />
+				</p:tab>
+
+				<p:tab title="Dépense récurrente">
+					<h:outputText value="Créer une dépense récurrente" />
+				</p:tab>
+
+				<p:tab title="Dépense exceptionnelle">
+					<h:outputText value="Créer une dépense exceptionnelle" />
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+		<br></br>
+		<br></br>
+		<br></br>
+			<h:form id="form1">
+				<p:messages id="contactMessage" showDetail="true" autoUpdate="true"
+					closable="true" />
+			</h:form>
+			
+			<h:form id="form2">  
+			<p:panel header="Créer un revenu exceptionnel"> 
+    <h:panelGrid id="grid" columns="3" width="500">  
+        <h:outputText value="Libellé: *" />  
+        <p:inputText id="libelle" required="true" value="#{revenuExceptionBean.libelle}" requiredMessage="Veuillez saisir le libellé"/>  
+        <p:message id="libelleMessage" for="libelle" />  
+  
+        <h:outputText value="Débit: *" />  
+        <p:inputText id="debit" required="true" value="#{revenuExceptionBean.debit}" requiredMessage="Veuillez saisir le débit"/>  
+        <p:message id="debitMessage" for="debit"/>  
+        
+         <h:outputText value="Date: *" />  
+        <p:calendar id="dateValeur" value="#{revenuExceptionBean.dateValeur}" required="true" requiredMessage="Veuillez saisir la date" />
+        <p:message id="dateValeurMessage" for="dateValeur"/>
+        
+    </h:panelGrid>  
+    <br></br>
+    <p:commandButton id="submitButton" value="Enregistrer" actionListener="#{revenuExceptionBean.createRevenuException}" update="grid"/>
+     </p:panel>
+  
+      
+</h:form> 
+
+
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+
+</html>

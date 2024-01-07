@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<link rel="stylesheet" href="assets/mdb/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="assets/mdb/css/mdb.min.css" />
+	<link rel="stylesheet" href="assets/css/icofont/icofont.min.css" />
+	<link rel="stylesheet" href="assets/css/style.css" />
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-panel-titlebar {
+    background: #0085cc;
+    color: white;
+    font-size: 12px;
+}
+
+.ui-button.ui-state-default {
+background: #0085cc !important;
+}
+.ui-button.ui-state-hover {
+background: #77d5f7 !important;
+color: white;
+}
+.ui-button.ui-state-active {
+background: blue !important;
+}
+
+</style>
+</h:head>
+<br /><br /><br />
+<body class="grey lighten-2">
+	<div class="container" style="font-family: Sanchez;">
+		<div class="row">
+			<div class="col-3">
+	
+			</div>
+			<div class="col-6">
+				<h3 class="text-center"><b>- OCTROIT DE CREDIT -</b></h3><br />
+	
+				<div class="row" style="background: #45c1b8;">
+					<div class="col-5 text-center"><br />
+						<img src="assets/images/OC LOGO.png" width="100%" class="rounded-circle" alt="" />
+					</div>
+					<div class="col-7 white">
+						<div class="mt-4">
+							<h4 class="mb-0 text-center" style="font-family: Sanchez;">
+								<b>Se connecter</b>
+							</h4><br />
+	
+							<h:form action="eligibilite.html" method="post mt-3">
+								<div class="cover-login-input">
+									<table width="100%">
+										<tr>
+											<td class="pl-2 pt-2" width="30">
+												<label for="login">
+													<i class="icofont-user"></i>
+												</label>
+											</td>
+											<td>
+												<p:inputText id="username" value="#{scoringBean.login}" styleClass="inputbox login-input" placeholder="Siasir ici ..." />
+											</td>
+										</tr>
+									</table>
+								</div>
+	
+								<div class="cover-login-input mt-2">
+									<table>
+										<tr>
+											<td class="pl-2 pt-2" width="30">
+												<label for="password">
+													<i class="icofont-lock"></i>
+												</label>
+											</td>
+											<td>
+												<h:inputSecret id="password" value="#{scoringBean.mdpasse}" password="true" styleClass="login-input" />
+													<h:outputText value=""/>
+												<h:message for="password" styleClass="errors"/>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<div class="mt-2 text-center">
+									<p:commandButton  value="Connexion" action="#{scoringBean.connect}"
+									styleClass="submitButton font-size-14 btn btn-md m-0 pl-4 pt-2 pb-2 pr-4 z-depth-0 black-text" style="background: #45c1b8 !important; border-radius: 20px; font-family: Sanchez;" />
+								</div>
+							</h:form><br />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

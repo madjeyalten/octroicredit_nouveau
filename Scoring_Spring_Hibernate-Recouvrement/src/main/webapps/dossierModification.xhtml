@@ -1,0 +1,343 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 14px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+</style>
+<title>Octroi de crédit</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+
+<link rel="stylesheet" href="assets/mdb/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="assets/mdb/css/mdb.min.css" />
+<link rel="stylesheet" href="assets/css/icofont/icofont.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<script type="text/javascript" src="js/switcher.js"></script>
+<script type="text/javascript" src="js/toggle.js"></script>
+<script type="text/javascript" src="js/ui.core.js"></script>
+<script type="text/javascript" src="js/ui.tabs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tabs > ul").tabs();
+	});
+	</script>
+	
+</h:head>
+
+<body>
+
+    <div class="p-2">
+            
+        <ui:include src="menu.xhtml"></ui:include>
+
+        <div class="side-bar p-2">
+            <div class="container-fluid p-0">
+              
+                <div class="row">
+                    <div class="col-3 pr-1">
+                        <div class="white-text text-center primary-background pt-2 pr-2" style="height: 40px;">
+                            <i class="icofont-user-alt-3" style="font-size: 20px;"></i>
+                            <small style="margin-top: 5px; margin-left: -7px;" class="float-right">
+                                <i class="icofont-plus"></i>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-8 pr-2 pl-0">
+                        <div class="pl-2 primary-background white-text">
+      
+                          <a href="dossier.xhtml" class="white-text">
+                              <div class="pt-2" style="height: 40px;">
+                                  Nouveau client
+                              </div>
+                          </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-11 pr-2">
+                        <div class="mt-1">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #FF0000;" class="white-text text-center pt-1 pb-1">
+                                            Paramétrages
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                            Utilisateurs
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="tache.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Mes tâches
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        <a href="produit.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Produits
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="garantie.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Garantie
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="tierspayeur.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Tiers payeur
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="intervenantpret.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Intervenants
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="pt-1">
+                                    <td>
+                                        <a href="dossier.xhtml">
+                                            <div style="background-color: #68a8a5;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Fiche client
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                            <li>
+                                                <a href="scoring.xhtml">
+                                                    Scoring
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="simulationCredit.xhtml">
+                                                    Simulation
+                                                </a>
+                                            </li>
+                                            <li>
+                                              <a href="">
+                                                  Edition de contrat
+                                              </a>
+                                          </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1">
+                                            Notification
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                            <li>
+                                                <a href="">
+                                                    Envoi courrier
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    Envoi mail
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    Envoi SMS
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <div class="wrap-content p-2">
+            <div class="title">
+                <h3 style="background-color: #707173;" class="white-text p-1">
+                    Informations client
+                </h3>
+            </div><br />
+
+            <h:form style="width:800px;">
+                <p:growl id="growl" sticky="true" showDetail="true"/>
+ 
+                <p:wizard  backLabel="Etape précédente" nextLabel="Etape suivante" style="width:800px;" flowListener="#{scoringBean.onFlowProcess}">
+                    <p:tab id="etatCivil" title="Etat civil" titleStyle="height:30px;font-size: 14px;background: #68a8a5;color: white;">
+                      <p:panel>
+                            <h5>Etat civil</h5>
+                            <p:messages />
+                            <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                
+                                <p:outputLabel value="Civilité: " for="civilite" />
+                                <p:autoComplete id="civilite" dropdown="true" value="#{scoringBean.selectedClient.civilite}" completeMethod="#{scoringBean.completeCivilite}" required="true" Message="Veuillez saisir la civilité" styleClass="ml-4 mb-1 mt-1" />			
+                                <p:outputLabel value="Nom:" for="nom" />
+                                <p:inputText id="nom" styleClass="input-text ml-4 mb-1 mt-1" value="#{scoringBean.selectedClient.nom}" required="true" requiredMessage="Veuillez saisir le nom" label="Nom" />
+                                <p:outputLabel value="Prenom:" for="prenom" />
+                                <p:inputText id="prenom" value="#{scoringBean.selectedClient.prenom}" required="true" requiredMessage="Veuillez saisir le prenom" label="Prenom" styleClass="ml-4 mb-1 mt-1" />
+            
+                                <p:outputLabel value="Date de naissance" for="dateNaissance" />
+                                <p:calendar id="dateNaissance" value="#{scoringBean.selectedClient.dateNaissance}" required="true" requiredMessage="Veuillez saisir la date de naissance" styleClass="ml-4 mb-1 mt-1"/>
+                                                  
+                                <p:outputLabel value="Commune de naissance:" for="communeNaissance" />
+                                <p:autoComplete id="communeNaissance" dropdown="true" value="#{scoringBean.selectedClient.communeNaissance}" completeMethod="#{scoringBean.completeCommune}" required="true" requiredMessage="Veuillez saisir la commune de naissance" styleClass="ml-4 mb-1 mt-2"/>
+            
+                                <p:outputLabel value="Pays de naissance:" for="paysNaissance" />
+                                <p:autoComplete id="paysNaissance" dropdown="true" value="#{scoringBean.selectedClient.paysNaissance}" completeMethod="#{scoringBean.completePays}" required="true" requiredMessage="Veuillez saisir le pays de naissance" styleClass="ml-4 mb-1 mt-1" />
+
+                                <p:outputLabel value="Situation de famille:" for="situationFamille" />
+                                <p:autoComplete id="situationFamille" dropdown="true" value="#{scoringBean.selectedClient.situationFamilial}" completeMethod="#{scoringBean.completeSituationFamille}" required="true" requiredMessage="Veuillez saisir la situation familiale" styleClass="ml-4 mb-1 mt-1" />
+                                <p:outputLabel value="Nombre d'enfants:" for="nombreEnfant" />
+                                <p:inputText id="nombreEnfant" value="#{scoringBean.selectedClient.nombreEnfant}" required="true" requiredMessage="Veuillez saisir le nombre d'enfant" label="Enfants" styleClass="ml-4 mb-1 mt-1" />
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="Adresse" title="Adresse" titleStyle="height:30px;font-size: 14px;background: #68a8a5;color: white;"  closable="true">
+                        <p:panel>
+                            <h5>Adresse</h5>
+                            <p:messages />
+                            <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                                <p:outputLabel value="Numéro et nom de la voie:" for="numeroVoie" />
+                                <p:inputText id="numeroVoie" value="#{scoringBean.selectedClient.adresseRue}" size="40" required="true" requiredMessage="Veuillez saisir l'adresse" label="Adresse" styleClass="ml-3 mt-1 mb-1"/>
+                                <p:outputLabel value="Code postal:" for="codePostal" />
+                                <p:inputText id="codePostal" value="#{scoringBean.selectedClient.adressecodePostal}" required="true" requiredMessage="Veuillez saisir le code postal" label="Code postal" styleClass="ml-3 mt-1 mb-1"/>
+                                <p:outputLabel value="Ville:" for="ville" />
+                                <p:autoComplete id="ville" dropdown="true" value="#{scoringBean.selectedClient.adresseVille}" completeMethod="#{scoringBean.completeCommune}" required="true" requiredMessage="Veuillez saisir la ville" styleClass="ml-3 mt-1 mb-1"/>
+                                <p:outputLabel value="Pays:" for="pays" />
+                                <p:autoComplete id="pays" dropdown="true" value="#{scoringBean.selectedClient.adressePays}" completeMethod="#{scoringBean.completePays}" required="true" requiredMessage="Veuillez saisir la ville" styleClass="ml-3 mt-1 mb-1"/>       
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+        
+                    <p:tab id="Coordonnes" title="Coordonnées" titleStyle="height:30px;font-size: 14px;background: #68a8a5;color: white;">
+                        <p:panel>
+                            <h5>Coordonnées</h5>
+                            <p:messages />
+                            <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                                <p:outputLabel value="Téléphone domicile:" for="telephoneDomicile" />
+                                <p:inputText id="telephoneDomicile" value="#{scoringBean.selectedClient.telephoneDomicile}" requiredMessage="Veuillez saisir le téléphone domicile" label="Adresse" styleClass="ml-4 mt-1 mb-1"/>
+                                <p:outputLabel value="Téléphone portable:" for="telephonePortable" />
+                                <p:inputText id="telephonePortable" value="#{scoringBean.selectedClient.telephonePortable}" required="true" requiredMessage="Veuillez saisir le téléphone portable" label="telephone" styleClass="ml-4 mt-1 mb-1" />
+                                <p:outputLabel value="Téléphone bureau:" for="telephoneBureau" />
+                                <p:inputText id="telephoneBureau" value="#{scoringBean.selectedClient.telephoneBureau}"  label="telephone" styleClass="ml-4 mt-1 mb-1" />
+                                <p:outputLabel value="Email:" for="email" />
+                                <p:inputText id="email" value="#{scoringBean.selectedClient.email}" validatorMessage="Format d'email invalide" styleClass="ml-4 mt-1 mb-1">  
+                                <f:validateRegex
+                                  pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                </p:inputText>      
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab id="Profession" title="Activités professionnelles" titleStyle="height:30px;font-size: 14px;background: #68a8a5;color: white;">
+                        <p:panel>
+                            <h5>
+                                Activités professionnelles
+                            </h5>
+                            <p:messages />
+                            <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                                <p:outputLabel value="Profession:" for="profession" />
+                                <p:inputText id="profession" value="#{scoringBean.selectedClient.profession}" style="width:200px;" requiredMessage="Veuillez saisir la profession" styleClass="ml-4 mt-1 mb-1"/>
+                                <h:outputText style="font-size: 14px;" value="Nom employeur: " />
+                                <p:inputText value="#{scoringBean.selectedClient.nomEmployeur}" style="width:200px;" required="true" styleClass="ml-4 mt-1 mb-1"/>
+                                <p:outputLabel value="Type de contrat" for="typeContrat" />
+                                <p:autoComplete id="typeContrat" dropdown="true"  value="#{scoringBean.selectedClient.typeContrat}" completeMethod="#{scoringBean.completeTypeContrat}" required="true" requiredMessage="Veuillez saisir le type de contrat" styleClass="ml-4 mt-1 mb-1"/> 
+                                <h:outputText style="font-size: 14px;" value="Ancienneté	: " />
+                                <p:inputText value="#{scoringBean.selectedClient.anciennete}" style="width:200px;" styleClass="ml-4 mt-1 mb-1"/>
+                                <p:outputLabel value="Catégorie socio-professionnelle :" for="categorie" />
+                                <p:autoComplete id="categorie" dropdown="true" value="#{scoringBean.selectedClient.categorieSocioProfessionel}" completeMethod="#{scoringBean.completeCategorie}" required="true" requiredMessage="Veuillez saisir la catégorie socio-professionnelle" styleClass="ml-4 mt-1 mb-1"/> 
+            
+                                <p:outputLabel value="Secteur d'activité :" for="secteurActivite" />
+                                <p:autoComplete id="secteurActivite" dropdown="true" value="#{scoringBean.selectedClient.secteurActivite}" completeMethod="#{scoringBean.completeSecteurActivite}" required="true" requiredMessage="Veuillez saisir le secteur d'activité" styleClass="ml-4 mt-1 mb-1"/>         
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+        
+                    <p:tab id="DonnesCommerciales" title="Données commerciales" titleStyle="height:30px;font-size: 14px;background: #68a8a5;color: white;">
+                        <p:panel>
+                            <h5>Données commerciales</h5>
+                            <p:messages />
+                            <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value"> 
+                                <p:outputLabel value="Mode d'habitation :" for="modeHabitation" />
+                                <p:autoComplete id="modeHabitation" dropdown="true" value="#{scoringBean.selectedClient.modeHabitation}" completeMethod="#{scoringBean.completeModeHabitation}" required="true" requiredMessage="Veuillez saisir le mode d'habitation" styleClass="ml-4 mt-1 mb-1" />         
+                                <p:outputLabel value="Revenu :" for="revenu" />
+                                <p:inputText id="revenu" value="#{scoringBean.selectedClient.revenuPension}" required="true" requiredMessage="Veuillez saisir le revenu" styleClass="ml-4 mt-1 mb-1" /> 
+                                <h:outputText style="font-size: 14px;" value="Loyer	: "/>
+                                <p:inputText value="#{scoringBean.selectedClient.chargeLoyer}"  styleClass="ml-4 mt-1 mb-1"  /> 
+                                <h:outputText style="font-size: 14px;" value="Prêt 1 en cours	: " />
+                                <p:inputText value="#{scoringBean.selectedClient.chargePremierPret}"  styleClass="ml-4 mt-1 mb-1" /> 
+                                <h:outputText style="font-size: 14px;" value="Prêt 2 en cours	: " />
+                                <p:inputText value="#{scoringBean.selectedClient.chargeDeuxiemePret}"  styleClass="ml-4 mt-1 mb-1" /> 
+                            </h:panelGrid>
+                        </p:panel>
+                        <br></br>
+                    </p:tab>
+                </p:wizard>
+            </h:form>
+            <h:form style="width:800px;">
+                <center>
+                    <p:commandButton value="Mettre à jour" actionListener="#{scoringBean.createFolder}" styleClass="pl-2 pr-2 btn btn-sm" style="background: #707173;color: #fff;border-color: none; border-radius: 0;"></p:commandButton>
+                    <p:spacer width="20"></p:spacer>
+                    <p:commandButton value="Simuler un crédit pour ce client" actionListener="#{scoringBean.simulateCredit}"  styleClass="pl-2 pr-2 btn btn-sm ml-0"  style="background: #47a447;color: #fff;border-color: none; border-radius: 0;"></p:commandButton>
+                </center>
+            </h:form>
+        </div>
+    </div>
+
+</body>
+</html>

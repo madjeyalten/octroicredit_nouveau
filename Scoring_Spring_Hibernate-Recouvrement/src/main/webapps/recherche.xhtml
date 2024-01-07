@@ -1,0 +1,313 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui">
+  
+<h:head>
+
+<f:metadata>
+    <f:view action="#{scoringBean.onLoad}" />
+</f:metadata>
+	<style type="text/css">
+
+    .ui-datatable tbody td, .ui-datatable tfoot td {
+    padding: 10px 10px;
+    overflow: hidden;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.ui-datatable th {
+    background: #68a8a5;
+    color: white;
+}
+
+.ui-messages-info, .ui-message-info {
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    width: 60%;
+}
+
+</style>
+<title>Octroi de crédit</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+
+    <link rel="stylesheet" href="assets/mdb/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/mdb/css/mdb.min.css" />
+    <link rel="stylesheet" href="assets/css/icofont/icofont.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script type="text/javascript" src="js/switcher.js"></script>
+    <script type="text/javascript" src="js/toggle.js"></script>
+    <script type="text/javascript" src="js/ui.core.js"></script>
+    <script type="text/javascript" src="js/ui.tabs.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $(".tabs > ul").tabs();
+        });
+    </script>
+	
+</h:head>
+
+    <body>
+
+        <div class="p-2">
+            
+            <ui:include src="menu.xhtml"></ui:include>
+
+            <div class="side-bar p-2">
+                <div class="container-fluid p-0">
+                  
+                    <div class="row">
+                        <div class="col-3 pr-1">
+                            <div class="white-text text-center primary-background pt-2 pr-2" style="height: 40px;">
+                                <i class="icofont-user-alt-3" style="font-size: 20px;"></i>
+                                <small style="margin-top: 5px; margin-left: -7px;" class="float-right">
+                                    <i class="icofont-plus"></i>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-8 pr-2 pl-0">
+                            <div class="pl-2 primary-background white-text">
+          
+                              <a href="">
+                                  <div class="pt-2" style="height: 40px;">
+                                      Nouveau client
+                                  </div>
+                              </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-11 pr-2">
+                            <div class="mt-1">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #FF0000;" class="white-text text-center pt-1 pb-1">
+                                                Paramétrages
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Utilisateurs
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="tache.xhtml">
+                                                <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                    Mes tâches
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                    <td>
+                                        <a href="produit.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Produits
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="garantie.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Garantie
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="tierspayeur.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Tiers payeur
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="intervenantpret.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Intervenants
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                    <tr class="pt-1">
+                                        <td>
+                                            <a href="recherche.xhtml">
+                                                <div style="background-color: #68a8a5;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                    Recherche client
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                                <li>
+                                                    <a href="scoring.xhtml">
+                                                        Scoring
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="simulationCredit.xhtml">
+                                                        Simulation
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="suiviemprunt.xhtml">
+                                                        Suivi emprunt
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="creditapprouve.xhtml">
+                                                        Décaisser les fonds <span class="badge badge-success">#{scoringBean.nombreCreditApprouve}</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="creditdecaisse.xhtml">
+                                                        Annuler un décaissement <span class="badge badge-danger">#{scoringBean.nombreCreditDecaisse}</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="eligibilite.xhtml">
+                                                        Eligibilité
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Edition de contrat
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1">
+                                                Notification
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                                <li>
+                                                    <a href="">
+                                                        Envoi courrier
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Envoi mail
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Envoi SMS
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="wrap-content p-2">
+                <div class="title">
+                    <h3 style="background-color: #707173;" class="white-text p-1">
+                        Recherche client
+                    </h3>
+                </div><br />
+
+                
+                <div class="section-cover p-4 m-2">
+                    <div>
+                     <p:growl id="rechercheMessage" showDetail="true"></p:growl>   
+                    </div>
+                    <h:form id="rechercheForm">                 
+                        <table>
+                            <tr>
+                                <td>
+                                    <b class="font-weight-bold text-muted black-text">Nom du client</b>
+                                </td>
+                                <td class="pl-3" width="200">
+                                    <p:inputText id="nomClient" value="#{scoringBean.searchNom}" styleClass="primary-input primary-background white-text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b class="font-weight-bold text-muted black-text">Numéro de dossier</b>
+                                </td>
+                                <td class="pl-3">
+                                    <p:inputText id="numDossier" value="#{scoringBean.searchIdentifiant}" styleClass="primary-input primary-background white-text" />
+                                </td>
+                            </tr>
+                        </table><br />   
+                        <div>
+                            <p:commandButton value="Rechercher"
+                              action="#{scoringBean.rechercher}" styleClass="submitButton btn btn-sm z-depth-0 pl-3 pr-3 white-text ml-0 mr-0"
+                              icon="ui-icon-search" style="border-radius: 0; background-color: #707173 !important;" />
+
+                            <p:commandButton value="créer Dossier"  style="border-radius: 0; background-color: #f44336 !important;"
+                            action="#{scoringBean.createDossier}" styleClass="submitButton btn btn-red btn-sm z-depth-0 pl-3 pr-3" />
+
+                        </div>
+                        
+                    </h:form>
+                    <div>
+                        <h:form>
+                            <p:dataTable id="search" var="client" 
+                                value="#{scoringBean.listSearchClient}" rendered="#{scoringBean.showTable}"  rowKey="#{client.nom}"  selectionMode="single"  emptyMessage="Aucun client trouvé" rows="9" paginator="true" paginatorAlwaysVisible="false">
+                                <p:ajax event="rowDblselect" listener="#{scoringBean.onRowDblClckSelect}" />		
+                                <p:column headerText="Nom" style="text-align: left;font-size: 14px;">  
+                                    #{client.nom} 
+                                </p:column>
+                                <p:column headerText="Prenom" style="text-align: left;font-size: 14px;">  
+                                    #{client.prenom} 
+                                </p:column>
+                                <p:column headerText="Profession" style="text-align: left;font-size: 14px;">  
+                                    #{client.profession} 
+                                </p:column>
+                                  <p:column headerText="Téléphone" style="text-align: left;font-size: 14px;">  
+                                    #{client.telephonePortable} 
+                                </p:column>
+                                <p:column headerText="Score" style="text-align: right;font-size: 14px;">  
+                                    #{client.scoreClient} 
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+<!--         <script src="assets/mdb/js/jquery.min.js"></script> -->
+        <script src="assets/mdb/js/popper.min.js"></script>
+        <script src="assets/mdb/js/bootstrap.min.js"></script>
+        <script src="assets/mdb/js/mdb.min.js"></script>
+    </body>
+</html>

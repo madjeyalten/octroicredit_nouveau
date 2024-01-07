@@ -1,0 +1,316 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-panel-title{
+    background: #0085cc;
+    color: white;
+    font-size: 12px;
+}
+
+.ui-panel-titlebar {
+    background: #0085cc;
+    color: white;
+    font-size: 12px;
+}
+
+.ui-datalist-header {
+    background: #0085cc;
+    color: white;
+    font-size: 12px;
+}
+
+.ui-widget-header .ui-state-default {
+background: #0085cc;
+}
+
+.ui-datatable thead th
+{
+background: #68a8a5;
+}
+
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator{
+background: #ccd3d6;
+}
+.buttonClass.ui-button-text{
+    background: #0085cc;
+    color: white;
+    font-size: 12px;
+}
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+</style>
+<title>Octroi de crédit</title>
+<!-- <meta http-equiv="content-type" content="text/html; charset=utf-8" /> -->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+
+<link rel="stylesheet" href="assets/mdb/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="assets/mdb/css/mdb.min.css" />
+<link rel="stylesheet" href="assets/css/icofont/icofont.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+	
+</h:head>
+
+<body>
+    <div id="main">
+
+        <div class="p-2">
+            <div class="app-bar black pb-2 pt-2">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <table width="100%">
+                                <tr>
+                                    <td width="50">
+                                        <img src="assets/images/OC LOGO.png" width="100%" class="rounded-circle primary-background" alt="logo" />
+                                    </td>
+                                    <td class="pt-2 pl-2">
+                                        <h4 class="white-text">
+                                            OCTROI DE CREDIT
+                                        </h4>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="white-text">Utilisateur : </span><input type="text" class="white pl-2" readonly="readonly" value="#{scoringBean.getUserName()}"
+                                        style="padding-top: 4px; padding-bottom: 6px;" />
+                                        <a href="" class="btn btn-white red-text z-depth-0 btn-sm m-0" style="border-radius: 0;">
+                                            <b>Déconnexion</b>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sub-menu primary-background mt-2 p-2">
+                <a href="scoring.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+                    Paraméter les scores
+                </a>
+                <a href="seuilscore.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+                    Paraméter les seuils
+                </a>
+                <a href="assuranceCommissions.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+                    Assurances / Commissions
+                </a>
+                <a href="dossier.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+                    Fiche client
+                </a>
+                <a href="recherche.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+                    Recherche client
+                </a>
+                <a href="tache.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+                    Mes tâches
+                </a>
+                <a href="index.html" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 float-right mr-0 mt-0 mb-0 unbordered-button">
+                    Quitter
+                </a>
+            </div>
+            <div class="side-bar p-2">
+                <div class="container-fluid p-0">
+                  
+                    <div class="row">
+                        <div class="col-3 pr-1">
+                            <div class="white-text text-center primary-background pt-2 pr-2" style="height: 40px;">
+                                <i class="icofont-user-alt-3" style="font-size: 20px;"></i>
+                                <small style="margin-top: 5px; margin-left: -7px;" class="float-right">
+                                    <i class="icofont-plus"></i>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-8 pr-2 pl-0">
+                            <div class="pl-2 primary-background white-text">
+          
+                              <a href="dossier.xhtml" class="white-text">
+                                  <div class="pt-2" style="height: 40px;">
+                                      Nouveau client
+                                  </div>
+                              </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-11 pr-2">
+                            <div class="mt-1">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #FF0000;" class="white-text text-center pt-1 pb-1">
+                                                Paramétrages
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Utilisateurs
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Mes tâches
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="pt-1">
+                                        <td>
+                                            <div style="background-color: #68a8a5;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Fiche client
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                                <li>
+                                                    <a href="">
+                                                        Scoring
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Simulation
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                  <a href="">
+                                                      Edition de contrat
+                                                  </a>
+                                              </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1">
+                                                Notification
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                                <li>
+                                                    <a href="">
+                                                        Envoi courrier
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Envoi mail
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Envoi SMS
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="wrap-content pl-2 pr-2 pt-2">
+                <div class="title">
+                    <h3 style="background-color: #707173;" class="white-text p-1">
+                        Simulation de crédit
+                    </h3>
+                </div><br />
+
+                <div class="row">
+
+                    <div class="col-6">
+                        
+                    </div>
+           
+                    <div class="col-6">
+                        <h4 class="grey lighten-2 p-1">Synthèse du crédit</h4>
+                        <span style="background-color: #707173;" class="white-text pl-2 pr-2">Avant crédit</span>
+                        <div class="mb-2">
+                            Taux de rendement : 20.00%
+                        </div>
+                        <span style="background-color: #707173;" class="white-text pl-2 pr-2">Après crédit</span>
+                        <div class="mb-2">
+                            Taux de rendement : 379.02%
+                        </div>
+                        <span style="background-color: #707173;" class="white-text pl-2 pr-2">Avant crédit</span>
+                        <div class="mb-2">
+                            
+                            Montant du crédit : 250000<br />
+                            Échéance :<br />
+                            Durée du crédit : 0 mois<br />
+                            Commissions : 0.00
+                            Taux nominal: 0.0%<br />
+                            Assurance : 0.00<br />
+                            Coût total du crédit : 258495.71
+
+                            <h5 class="primary-background white-text text-center mt-3 mb-2">
+                                LISTE DES PIÈCES À FOURNIR
+                            </h5>
+
+                            <div>
+                                Pièce d'identité emprunteur<br />
+                                Bulletin de salaire emprunter<br />
+                                Relevé de compte emprunteur<br />
+                                Justificatif de domicile
+                            </div>
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn ml-0 btn-sm white-text primary-background z-depth-0 dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false" style="border-radius: 0;">
+                                                Envoyer ver
+                                            </button>
+                                            <div class="dropdown-menu font-size-14" aria-labelledby="triggerId">
+                                                <a class="dropdown-item" href="#">Confirmer</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" style="padding: 3px 5px;" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/mdb/js/jquery.min.js"></script>
+        <script src="assets/mdb/js/popper.min.js"></script>
+        <script src="assets/mdb/js/bootstrap.min.js"></script>
+        <script src="assets/mdb/js/mdb.min.js"></script>
+    </body>
+</html>

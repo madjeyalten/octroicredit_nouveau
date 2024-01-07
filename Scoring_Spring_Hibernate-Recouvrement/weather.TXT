@@ -1,0 +1,16 @@
+@relation weather
+
+@attribute age numeric
+@attribute revenu numeric 
+@attribute arisque {yes, no}
+
+@data
+20,400,yes
+24,300,yes
+25,450,yes
+25,450,yes
+37,500,yes
+40,200,yes
+45,450,yes
+25,600,yes
+41,78,no

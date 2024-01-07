@@ -1,0 +1,252 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+</style>
+<title>Adminizio Lite</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<script type="text/javascript" src="js/switcher.js"></script>
+<script type="text/javascript" src="js/toggle.js"></script>
+<script type="text/javascript" src="js/ui.core.js"></script>
+<script type="text/javascript" src="js/ui.tabs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tabs > ul").tabs();
+	});
+	</script>
+	
+</h:head>
+
+<body>
+<div id="main">
+  <!-- Tray -->
+  <div id="tray" class="box">
+    <p class="f-left box">
+      <!-- Switcher -->
+       <span class="f-left" id="switcher"> <a href="javascript:void(0);" rel="1col" class="styleswitch ico-col1" title="Display one column"></a> <a href="javascript:void(0)" rel="2col" class="styleswitch ico-col2" title="Display two columns"></a> </span><strong>Octroi de crédit</strong> </p>
+   <p class="f-right">Utilisateur : <strong><a href="#">#{scoringBean.getUserName()}</a></strong> <strong><a href="index.xhtml" id="logout">Déconnexion</a></strong></p>
+  </div>
+  <!--  /tray -->
+  <hr class="noscreen" />
+  <!-- Menu -->
+  <div id="menu" class="box">
+    <ul class="box">
+      <li id="menu-active"><a href="scoring.xhtml"><span>Paramétrer les scores</span></a></li>
+      <!-- Active -->
+      <li><a href="seuilscore.xhtml"><span>Paramétrer les seuils</span></a></li>
+      <li><a href="assuranceCommissions.xhtml"><span>Assurances/Commissions</span></a></li>
+      <li><a href="dossier.xhtml"><span>Fiche Client</span></a>
+      </li>
+      <li><a href="recherche.xhtml"><span>Recherche Client</span></a></li>
+      <li><a href="tache.xhtml"><span>Mes Tâches</span></a></li>
+      <li><a href="index.xhtml"><span>Quitter</span></a></li>
+    </ul>
+  </div>
+  <!-- /header -->
+  <hr class="noscreen" />
+  <!-- Columns -->
+  <div id="cols" class="box">
+    <!-- Aside (Left Column) -->
+    <div id="aside" class="box">
+      <div class="padding box">
+        <!-- Logo (Max. width = 200px) -->
+        <p id="logo"><a href="#"><img src="tmp/logo.gif" alt="" /></a></p>
+        <!-- Search -->
+        <!-- Create a new project -->
+        <p id="btn-create" class="box"><a href="#"><span>Nouveau client</span></a></p>
+      </div>
+      <!-- /padding -->
+      <ul class="box">
+        <li><a href="#">Paramétrage</a></li>
+        <li><a href="#">Utilisateur</a></li>
+        <li><a href="#">Mes tâches</a></li>
+        <li id="submenu-active"><a href="#">Fiche Client</a>
+          <!-- Active -->
+          <ul>
+            <li><a href="#">Scoring</a></li>
+            <li><a href="#">Simulation</a></li>
+            <li><a href="suiviemprunt.xhtml">Suivi emprunt</a></li>
+            <li><a href="#">Edition du contrat</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Notification</a>
+          <ul>
+            <li><a href="#">Envoi courrier</a></li>
+            <li><a href="#">Envoi mail</a></li>
+            <li><a href="#">Envoi SMS</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /aside -->
+    <hr class="noscreen" />
+    <!-- Content (Right Column) -->
+    <div id="content" class="box">
+      <h3 class="tit">Informations client</h3>
+      <br></br>
+      
+      <h:form style="width:800px;">
+                 
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+ 
+    <p:wizard  backLabel="Etape précédente" nextLabel="Etape suivante" style="width:800px;" flowListener="#{scoringBean.onFlowProcess}" >
+        <p:tab id="etatCivil" title="Etat civil" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Etat civil">
+                <p:messages />
+                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                    <h:outputText style="font-size: 12px;" value="Nom: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.nom}" required="true" requiredMessage="Veuillez saisir le nom" label="Nom"/>
+                    <h:outputText style="font-size: 12px;" value="Prenom: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.prenom}" required="true" requiredMessage="Veuillez saisir le prenom" label="Prenom"/>
+ 
+                    <h:outputText style="font-size: 12px;" value="Date de naissance	: " />
+                    <p:calendar value="#{scoringBean.selectedClient.dateNaissance}" />
+                    
+                     <h:outputText style="font-size: 12px;" value="Commune de naissance: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.communeNaissance}" required="true" requiredMessage="Veuillez saisir la commune de naissance" label="Commune"/>
+                    <h:outputText style="font-size: 12px;" value="Situation de famille: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.situationFamilial}" required="true" requiredMessage="Veuillez saisir la situation familiale" label="Situation"/>
+                    <h:outputText style="font-size: 12px;" value="Nombre d'enfants: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.nombreEnfant}" required="true" requiredMessage="Veuillez saisir le nombre d'enfant" label="Enfants"/>
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+         <p:tab id="Adresse" title="Adresse" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Adresse">
+                <p:messages />
+                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                    <h:outputText style="font-size: 12px;" value="Numéro et nom de la voie: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.adresseRue}" required="true" requiredMessage="Veuillez saisir l'adresse" label="Adresse"/>
+                    <h:outputText style="font-size: 12px;" value="Code postal: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.adressecodePostal}" required="true" requiredMessage="Veuillez saisir le code postal" label="Code postal"/>
+                    <h:outputText style="font-size: 12px;" value="Pays	: " />
+                    <p:inputText value="#{scoringBean.selectedClient.adressePays}" />        
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+         <p:tab id="Coordonnes" title="Coordonnées" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Coordonnées">
+                <p:messages />
+                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                    <h:outputText style="font-size: 12px;" value="Téléphone domicile: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.telephoneDomicile}" requiredMessage="Veuillez saisir le téléphone domicile" label="Adresse"/>
+                    <h:outputText style="font-size: 12px;" value="Téléphone portable: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.telephonePortable}" required="true" requiredMessage="Veuillez saisir le téléphone portable" label="Code postal"/>
+                    <h:outputText style="font-size: 12px;" value="Email	: " />
+                    <p:inputText value="#{scoringBean.selectedClient.email}" />        
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+ 
+         <p:tab id="Profession" title="Activités professionnelles" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Activités professionnelles">
+                <p:messages />
+                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                    <h:outputText style="font-size: 12px;" value="Profession: *" />
+                    <p:inputText value="#{scoringBean.selectedClient.profession}" style="width:200px;" requiredMessage="Veuillez saisir la profession"/>
+                    <h:outputText style="font-size: 12px;" value="Nom employeur: " />
+                    <p:inputText value="#{scoringBean.selectedClient.nomEmployeur}" style="width:200px;" required="true"/>
+                    <h:outputText style="font-size: 12px;" value="Type de contrat	: " />
+                    
+                    <p:selectOneListbox  value="#{scoringBean.selectedClient.typeContrat}" style="width:200px;"
+									requiredMessage="Veuillez saisir le mode d'habitation" size="1">
+									<f:selectItem itemLabel="" itemValue="vide" />
+									<f:selectItem itemLabel="Contrat à durée indéterminée" itemValue="CDI" />
+									<f:selectItem itemLabel="Contrat à durée déterminée" itemValue="CDD" />
+					</p:selectOneListbox>
+                    <h:outputText style="font-size: 12px;" value="Ancienneté	: " />
+                    <p:inputText value="#{scoringBean.selectedClient.anciennete}" style="width:200px;"/>
+                    <h:outputText style="font-size: 12px;" value="Catégorie socio-professionnelle : " />
+                    
+                    <p:selectOneListbox  value="#{scoringBean.selectedClient.categorieSocioProfessionel}" style="width:200px;"
+									requiredMessage="Veuillez saisir la catégorie professionnelle" size="1">
+									<f:selectItem itemLabel="" itemValue="vide" />
+									<f:selectItem itemLabel="Cadre" itemValue="Cadre" />
+									<f:selectItem itemLabel="Ouvrier" itemValue="Ouvrier"/>
+					</p:selectOneListbox>
+					
+                    <h:outputText style="font-size: 12px;" value="Secteur d'activité : " />
+                    
+                    <p:selectOneListbox  value="#{scoringBean.selectedClient.secteurActivite}" style="width:200px;"
+									requiredMessage="Veuillez le secteur d'activité" size="1">
+									<f:selectItem itemLabel="" itemValue="vide" />
+									<f:selectItem itemLabel="Secteur privé" itemValue="PRIVE" />
+									<f:selectItem itemLabel="Secteur publique" itemValue="PUBLIC"/>
+					</p:selectOneListbox>          
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        
+        <p:tab id="DonnesCommerciales" title="Données commerciales" titleStyle="height:20px;font-size: 12px">
+            <p:panel header="Données commerciales">
+                <p:messages />
+                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                    <h:outputText style="font-size: 12px;" value="Mode d'habitation	: " />								
+					<p:selectOneListbox  value="#{scoringBean.selectedClient.modeHabitation}"
+									requiredMessage="Veuillez saisir le mode d'habitation" size="1">
+									<f:selectItem itemLabel="" itemValue="vide" />
+									<f:selectItem itemLabel="Propriétaire" itemValue="PROP" />
+									<f:selectItem itemLabel="Locataire" itemValue="LOC" />
+					</p:selectOneListbox>
+					<h:outputText style="font-size: 12px;" value="Revenu	: " />
+                    <p:inputText value="#{scoringBean.selectedClient.revenuPension}" /> 
+                    <h:outputText style="font-size: 12px;" value="Loyer	: " />
+                    <p:inputText value="#{scoringBean.selectedClient.chargeLoyer}" /> 
+                     <h:outputText style="font-size: 12px;" value="Prêt 1 en cours	: " />
+                    <p:inputText  value="#{scoringBean.selectedClient.chargePremierPret}"/> 
+                     <h:outputText style="font-size: 12px;" value="Prêt 2 en cours	: " />
+                    <p:inputText value="#{scoringBean.selectedClient.chargeDeuxiemePret}"/> 
+				</h:panelGrid>
+            </p:panel>
+            <br></br>
+        </p:tab>
+       </p:wizard>
+       </h:form>
+       <h:form style="width:800px;">
+       <center>
+        <p:commandButton value="Mettre à jour" actionListener="#{scoringBean.createFolder}"  styleClass="submitButton"></p:commandButton>
+        <p:spacer width="20"></p:spacer>
+        <p:commandButton value="Simuler un crédit pour ce client" actionListener="#{scoringBean.simulateCredit}"  styleClass="submitButton"></p:commandButton>
+       </center>
+       </h:form>
+    </div>
+    <!-- /content -->
+  </div>
+  <!-- /cols -->
+  <hr class="noscreen" />
+  <!-- Footer -->
+  <div id="footer" class="box">
+    <p class="f-right">Développé par <a href="#">Fingiciel</a></p>
+  </div>
+  <!-- /footer -->
+</div>
+<!-- /main -->
+</body>
+</html>

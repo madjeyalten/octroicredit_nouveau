@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+</style>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="50">
+
+			
+			<p:tabMenu activeIndex="0">
+				<p:menuitem value="Simulation"  outcome="simulation"
+					icon="ui-icon-star" />
+				<p:menuitem value="Total des balances" outcome="total"
+					icon="ui-icon-person" />
+			</p:tabMenu>
+		</p:layoutUnit>
+
+		
+
+		<p:layoutUnit id="center" position="center">
+			<h1 class="title ui-widget-header ui-corner-all">Simulations réalisées</h1>
+			<h:form id="formTable">
+
+	<p:dataTable var="simulation" value="#{balanceBean.listSimulation1}" id="simulId" rows="10" emptyMessage="Aucune simulation trouvée"  selection="#{balanceBean.seletedSimulation1}" selectionMode="single" rowKey="#{simulation.id}" >  
+  
+      <p:ajax event="rowSelect" listener="#{balanceBean.onRowSelect}"/>  
+         <p:column headerText="Type de simulation">  
+            #{simulation.id.ratio}  
+        </p:column>   
+  
+        <p:column headerText="Date et heure">  
+            #{simulation.id.dateAndHeure}  
+        </p:column>   
+ 
+    </p:dataTable>  
+    <p:dataTable var="simulation" value="#{balanceBean.listSimulation2}" id="simul2Id" rows="10" emptyMessage=""  selection="#{balanceBean.seletedSimulation1}" selectionMode="single" rowKey="#{simulation.id}" rendered="true">  
+  
+      <p:ajax event="rowSelect" listener="#{balanceBean.onRowSelect}"/>  
+         <p:column>  
+            #{simulation.id.ratio}  
+        </p:column>   
+  
+        <p:column>  
+            #{simulation.id.dateAndHeure}  
+        </p:column>   
+ 
+    </p:dataTable>  
+    <p:dataTable var="simulation" value="#{balanceBean.listSimulation3}" id="simul3Id" rows="10" emptyMessage="Aucune simulation trouvée"  selection="#{balanceBean.seletedSimulation1}" selectionMode="single" rowKey="#{simulation.id}" rendered="balanceBean.isListSimulation3NotEmpty">  
+  
+      <p:ajax event="rowSelect" listener="#{balanceBean.onRowSelect}"/>  
+         <p:column>  
+            #{simulation.id.ratio}  
+        </p:column>   
+  
+        <p:column>  
+            #{simulation.id.dateAndHeure}  
+        </p:column>   
+ 
+    </p:dataTable> 
+			</h:form>
+
+
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+
+</html>

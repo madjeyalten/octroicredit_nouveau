@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+
+</style>
+<script type="text/javascript">
+var currentEvent;
+  $(document).ready(function() {
+  PrimeFaces.widget.ContextMenu.prototype.show = function(e) {
+     //hide other contextmenus if any
+     $(document.body).children('.ui-contextmenu:visible').hide();
+
+     if(e) {
+        currentEvent = e;
+     } 
+
+     var win = $(window),
+     left = e.pageX,
+     top = e.pageY,
+     width = this.jq.outerWidth(),
+     height = this.jq.outerHeight();
+
+     //collision detection for window boundaries
+     if((left + width) > (win.width())+ win.scrollLeft()) {
+        left = left - width;
+     }
+     if((top + height ) > (win.height() + win.scrollTop())) {
+        top = top - height;
+     }
+
+     if(this.cfg.beforeShow) {
+        this.cfg.beforeShow.call(this);
+     }
+
+     this.jq.css({
+        'left': left,
+        'top': top,
+        'z-index': ++PrimeFaces.zindex
+     }).show();
+
+     e.preventDefault(); 
+  };
+});
+</script>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Outils" icon="ui-icon-gear">
+						<p:menuitem value="Questionnaire" url="eligibilite.xhtml"/>
+						<p:menuitem value="Paramétrer les scores" url="scoring.xhtml"/>
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+
+					<p:submenu label="Client" icon="ui-icon-gear">
+							<p:menuitem value="Fiche client" url="dossier.xhtml"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+					
+					<p:submenu label="Crédit" icon="ui-icon-gear">
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+						<p:submenu label="Tâche" icon="ui-icon-gear">
+						<p:menuitem value="Mes tâches" url="tache.xhtml"/>
+					</p:submenu>
+					<p:submenu label="Utilisateur" icon="ui-icon-gear">
+						<p:menuitem value="Créer un utilisateur" url="createUser.xhtml"/>
+					</p:submenu>
+
+					<p:menuitem value="Quitter"  actionListener="#{scoringBean.deconnect}"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{scoringBean.loginAndPassword}</p:outputLabel>
+					</f:facet>
+				</p:menubar>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab  title="Simulation">
+					<h:outputText value="Faire une simulation"/>
+				</p:tab>
+				<p:tab title="Score">
+					<h:outputText value="Paramétrer un score"/>
+				</p:tab>
+				<p:tab title="Crédit">
+					<h:outputText value="Simuler un crédit"/>
+				</p:tab>
+				<p:tab title="Tâches">
+					<h:outputText value="Mes tâches"/>
+				</p:tab>
+				<p:tab title="Tableau de bord">
+					<h:outputText value="Mes tableaux de bord"/>
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+				<h:form id="userForm" style="height:230px;width:800px;">
+		 			<p:messages id="userMessage" showDetail="true" autoUpdate="true"
+					closable="true" />
+		<p:panel style="height:200px;width:800px;">
+            <f:facet name="header">
+            <h:outputText value="Créer un utilisateur" />
+            </f:facet>
+            <h:panelGrid columns="3">
+            	    <h:outputText value="Nom" /> 
+					<p:inputText id="nomUser" value="#{scoringBean.nomUtilisateur}" required="true"/>
+					<h:outputText value=""/>
+					 <h:outputText value="Prenom" /> 
+					<p:inputText id="prenomUser" value="#{scoringBean.prenomUtilisateur}" required="true"/>
+					<h:outputText value=""/>
+					<h:outputText value="Email" /> 
+					<p:inputText id="emailUser" validatorMessage="Veuillez saisir un email valide" value="#{scoringBean.emailUtilisateur}" required="true">
+					<f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+					<h:outputText value=""/>
+					<h:outputText value="Login" /> 
+					<p:inputText id="loginUser" value="#{scoringBean.loginUtilisateur}" required="true"/>
+					<h:outputText value=""/>
+					<h:outputText value="Mot de passe" /> 
+					<p:inputText id="mdpUser" value="#{scoringBean.mdpUtilisateur}" required="true"/>
+					<h:outputText value=""/>			 
+           </h:panelGrid>   
+          <p:spacer height="50"></p:spacer>
+          <p:commandButton  value="Enregistrer" action="#{scoringBean.createUtilisateur}" restyleClass="submitButton" update=":userForm"/>
+          <p:spacer width="10"></p:spacer>
+		  <p:commandButton  value="Abandonner" action="#{scoringBean.abandonner}" styleClass="submitButton"/>     
+        </p:panel>
+         </h:form>
+         <h:form>			 
+         </h:form>
+	</p:layoutUnit>	
+	</p:layout>
+</h:body>
+
+</html>

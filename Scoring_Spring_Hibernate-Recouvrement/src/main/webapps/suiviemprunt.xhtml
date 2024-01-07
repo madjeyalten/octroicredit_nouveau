@@ -1,0 +1,255 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 14px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-datatable th {
+    background: #68a8a5;
+    color: white;
+}
+
+.ui-panel-title{
+    background: #68a8a5;
+    color: white;
+    font-size: 12px;
+}
+
+.ui-panel-titlebar {
+    background: #68a8a5;
+    color: white;
+    font-size: 12px;
+}
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+
+    .ui-datatable tbody td, .ui-datatable tfoot td {
+    padding: 10px 10px;
+    overflow: hidden;
+    border-width: 1px;
+    border-style: solid;
+}
+</style>
+<title>Octroi de crédit</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyleBis.css" />
+
+<link rel="stylesheet" href="assets/mdb/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="assets/mdb/css/mdb.min.css" />
+<link rel="stylesheet" href="assets/css/icofont/icofont.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<script type="text/javascript" src="js/switcher.js"></script>
+<script type="text/javascript" src="js/toggle.js"></script>
+<script type="text/javascript" src="js/ui.core.js"></script>
+<script type="text/javascript" src="js/ui.tabs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tabs > ul").tabs();
+	});
+	</script>
+	
+</h:head>
+
+    <body>
+        <div class="p-2">
+            
+            <ui:include src="menu.xhtml"></ui:include>
+
+            <div class="side-bar p-2">
+                <div class="container-fluid p-0">
+                  
+                    <div class="row">
+                        <div class="col-3 pr-1">
+                            <div class="white-text text-center primary-background pt-2 pr-2" style="height: 40px;">
+                                <i class="icofont-user-alt-3" style="font-size: 20px;"></i>
+                                <small style="margin-top: 5px; margin-left: -7px;" class="float-right">
+                                    <i class="icofont-plus"></i>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-8 pr-2 pl-0">
+                            <div class="pl-2 primary-background white-text">
+          
+                              <a href="dossier.xhtml" class="white-text">
+                                  <div class="pt-2" style="height: 40px;">
+                                      Nouveau client
+                                  </div>
+                              </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-11 pr-2">
+                            <div class="mt-1">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #FF0000;" class="white-text text-center pt-1 pb-1">
+                                                Paramétrages
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Utilisateurs
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="tache.xhtml">
+                                                <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                    Mes tâches
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr class="pt-1">
+                                        <td>
+                                            <a href="suiviemprunt.xhtml">
+                                                <div style="background-color: #68a8a5;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                    Suivi emprunt
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                                <li>
+                                                    <a href="scoring.xhtml">
+                                                        Scoring
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="simulationCredit.xhtml">
+                                                        Simulation
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                  <a href="">
+                                                      Edition de contrat
+                                                  </a>
+                                              </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1">
+                                                Notification
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                                <li>
+                                                    <a href="">
+                                                        Envoi courrier
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Envoi mail
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Envoi SMS
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="wrap-content p-2">
+                <div class="title">
+                    <h3 style="background-color: #707173;" class="white-text p-1">
+                        Rechercher un emprunt
+                    </h3>
+                </div><br />
+
+                <p:messages id="rechercheMessage" showDetail="true" autoUpdate="true" closable="true" />
+          
+                <h:form id="rechercheForm" style="width:800px; margin-bottom: 15px;">
+
+                    <p:panel style="width:800px;">
+                        <f:facet name="header">
+                            <h:outputText value="Recherche d'emprunt" />
+                        </f:facet>
+                        <h:panelGrid columns="3" cellspacing="8">
+                            <h:outputText value="Nom du client" /> 
+                            <p:inputText id="nomClient" style="font-size: 14px; margin-bottom: 10px; border-radius: 0; width: 200px;"
+                            value="#{scoringBean.searchEmprunt}" styleClass="inputbox p-2 ml-3"/>
+                            <h:outputText value=""/>
+                            <br></br>
+                            <p:commandButton  value="Rechercher" action="#{scoringBean.rechercherEmprunt}" style="border-radius: 0; background: #707173 !important;"
+                            styleClass="submitButton ml-3 p-1 white-text"/>				 
+                        </h:panelGrid>       
+                    </p:panel>
+                </h:form>
+                <h:form style="width:800px;">
+                    <p:dataTable id="search" var="credit" value="#{scoringBean.listSearchEmprunt}" rendered="#{scoringBean.showTableEmprunt}"    emptyMessage="Aucun emprunt trouvé">		
+                        <p:column headerText="Nom" style="text-align: left;font-size: 14px;">  
+                            #{credit.nom} 
+                        </p:column>
+                        <p:column headerText="Prenom" style="text-align: left;font-size: 14px;">  
+                            #{credit.prenom} 
+                        </p:column>
+                        <p:column headerText="Montant" style="text-align: left;font-size: 14px;">  
+                            #{credit.montant} 
+                        </p:column>
+                        <p:column headerText="Mensaualié" style="text-align: left;font-size: 14px;">  
+                            #{credit.mensualite} 
+                        </p:column>
+                        <p:column headerText="Statut" style="font-size: 14px;">  
+                            <span class="#{scoringBean.getStatutStyle(credit)}">#{credit.statut}</span>
+                        </p:column>
+                        <p:column headerText="Attribué à" style="text-align: center;font-size: 14px;">  
+                            #{credit.envoyerVers} 
+                        </p:column>
+                    </p:dataTable>
+              </h:form>            
+
+            </div>
+        </div>
+
+        <script src="assets/mdb/js/jquery.min.js"></script>
+        <script src="assets/mdb/js/popper.min.js"></script>
+        <script src="assets/mdb/js/bootstrap.min.js"></script>
+        <script src="assets/mdb/js/mdb.min.js"></script>
+    </body>
+</html>

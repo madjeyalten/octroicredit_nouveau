@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+</style>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Depense" icon="ui-icon-document">
+						<p:menuitem value="Reccurente" url="pages/newDepenseCourante.xhtml" icon="ui-icon-search" />
+						<p:menuitem value="Exceptionnelle" url="pages/newDepenseException.xhtml" icon="ui-icon-newwin" />
+						<p:separator />
+						<p:menuitem value="Quit" url="#" />
+					</p:submenu>
+
+					<p:submenu label="Revenu" icon="ui-icon-pencil">
+						<p:menuitem value="Reccurent" url="pages/newRevenuCourante.xhtml"
+							icon="ui-icon-arrowreturnthick-1-w" />
+						<p:menuitem value="Exceptionnel" url="pages/newRevenuException.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
+					</p:submenu>
+
+					<p:submenu label="Outils" icon="ui-icon-help">
+						<p:menuitem value="Tableau de bord" url="#" />
+					</p:submenu>
+
+					<p:submenu label="Simulation" icon="ui-icon-gear">
+							<p:menuitem value="Simuler le solde" actionListener="#{menuBean.save}"
+								icon="ui-icon-disk" update="messages" />
+								<p:menuitem value="Solde futur" actionListener="#{menuBean.save}"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+
+					<p:menuitem value="Quit" url="#"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{depenseCouranteBean.loginAndPassword}</p:outputLabel>
+					</f:facet>
+				</p:menubar>
+				<p:commandButton type="button" value="Déconnexion"
+							actionListener="#{depenseCouranteBean.deconnect}" update="grid" icon="ui-icon-extlink" />
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab title="Simulation">
+					<h:outputText value="Faire une simulation" />
+				</p:tab>
+
+				<p:tab title="Dépense récurrente">
+					<h:outputText value="Créer une dépense récurrente" />
+				</p:tab>
+
+				<p:tab title="Dépense exceptionnelle">
+					<h:outputText value="Créer une dépense exceptionnelle" />
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+			<h:form id="formTable">
+				<p:dataTable id="dep" var="depense" 
+					value="#{depenseCouranteBean.listLibelle}" rows="20">
+					<p:ajax event="rowToggle" listener="#{depenseCouranteBean.onRowToggle}" update=":formTable:dep" /> 
+        <p:column style="width:16px">
+            <p:rowToggler />
+        </p:column>
+        <p:column>
+            <h:outputText value="Mes dépenses reccurentes" />
+        </p:column>
+		<p:rowExpansion>
+		<p:dataTable id="depBis" var="depenseBis" 
+					value="#{depenseCouranteBean.listDepensecourante}" rows="20">
+                    <f:facet name="header">
+                    Liste des dépenses récurrentes
+                    </f:facet>
+					<p:column headerText="Libellé">  
+            #{depenseBis.libelle} 
+        </p:column>
+
+					<p:column headerText="Débit">  
+            #{depenseBis.debit} 
+        </p:column>
+
+					<p:column headerText="Solde">  
+            #{depenseBis.solde} 
+        </p:column>
+				</p:dataTable>
+		</p:rowExpansion>
+				</p:dataTable>
+			</h:form>
+		<!-- deuxième tableau -->
+			<h:form id="formTable2">
+				<p:dataTable id="dep" var="depense" 
+					value="#{depenseCouranteBean.listLibelle}" rows="20">
+					<p:ajax event="rowToggle" listener="#{depenseCouranteBean.onRowToggle}" update=":formTable2:dep" /> 
+        <p:column style="width:16px">
+            <p:rowToggler />
+        </p:column>
+        <p:column>
+            <h:outputText value="Mes dépenses exceptionnelles" />
+        </p:column>
+		<p:rowExpansion>
+		<p:dataTable id="depBis" var="depenseBis" 
+					value="#{depenseExceptionBean.listDepenseException}" rows="20">
+                    <f:facet name="header">
+                    Liste des dépenses exceptionnelles
+                    </f:facet>
+					<p:column headerText="Libellé">  
+            #{depenseBis.libelle} 
+        </p:column>
+
+					<p:column headerText="Débit">  
+            #{depenseBis.debit} 
+        </p:column>
+
+					<p:column headerText="Solde">  
+            #{depenseBis.solde} 
+        </p:column>
+				</p:dataTable>
+		</p:rowExpansion>
+				</p:dataTable>
+			</h:form>
+			<!-- troisième tableau -->
+			<h:form id="formTable3">
+				<p:dataTable id="dep" var="depense" 
+					value="#{depenseCouranteBean.listLibelle}" rows="20">
+					<p:ajax event="rowToggle" listener="#{depenseCouranteBean.onRowToggle}" update=":formTable3:dep" /> 
+        <p:column style="width:16px">
+            <p:rowToggler />
+        </p:column>
+        <p:column>
+            <h:outputText value="Mes revenus reccurents" />
+        </p:column>
+		<p:rowExpansion>
+		<p:dataTable id="depBis" var="depenseBis" 
+					value="#{revenuCourantBean.listRevenuCourant}" rows="20">
+                    <f:facet name="header">
+                    Liste des revenus récurrents
+                    </f:facet>
+					<p:column headerText="Libellé">  
+            #{depenseBis.libelle} 
+        </p:column>
+
+					<p:column headerText="Débit">  
+            #{depenseBis.debit} 
+        </p:column>
+
+					<p:column headerText="Solde">  
+            #{depenseBis.solde} 
+        </p:column>
+				</p:dataTable>
+		</p:rowExpansion>
+				</p:dataTable>
+			</h:form>
+			<!-- quatrième tableau -->
+			<h:form id="formTable4">
+				<p:dataTable id="dep" var="depense" 
+					value="#{depenseCouranteBean.listLibelle}" rows="20">
+					<p:ajax event="rowToggle" listener="#{depenseCouranteBean.onRowToggle}" update=":formTable4:dep" /> 
+        <p:column style="width:16px">
+            <p:rowToggler />
+        </p:column>
+        <p:column>
+            <h:outputText value="Mes revenus exceptionnels" />
+        </p:column>
+		<p:rowExpansion>
+		<p:dataTable id="depBis" var="depenseBis" 
+					value="#{revenuExceptionBean.listRevenuException}" rows="20">
+                    <f:facet name="header">
+                    Liste des revenus exceptionnels
+                    </f:facet>
+					<p:column headerText="Libellé">  
+            #{depenseBis.libelle} 
+        </p:column>
+
+					<p:column headerText="Débit">  
+            #{depenseBis.debit} 
+        </p:column>
+
+					<p:column headerText="Solde">  
+            #{depenseBis.solde} 
+        </p:column>
+				</p:dataTable>
+		</p:rowExpansion>
+				</p:dataTable>
+			</h:form>
+	</p:layoutUnit>
+	</p:layout>
+
+</h:body>
+
+</html>

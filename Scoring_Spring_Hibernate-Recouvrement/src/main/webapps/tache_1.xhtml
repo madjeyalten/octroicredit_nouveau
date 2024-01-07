@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+
+</style>
+<script type="text/javascript">
+var currentEvent;
+  $(document).ready(function() {
+  PrimeFaces.widget.ContextMenu.prototype.show = function(e) {
+     //hide other contextmenus if any
+     $(document.body).children('.ui-contextmenu:visible').hide();
+
+     if(e) {
+        currentEvent = e;
+     } 
+
+     var win = $(window),
+     left = e.pageX,
+     top = e.pageY,
+     width = this.jq.outerWidth(),
+     height = this.jq.outerHeight();
+
+     //collision detection for window boundaries
+     if((left + width) > (win.width())+ win.scrollLeft()) {
+        left = left - width;
+     }
+     if((top + height ) > (win.height() + win.scrollTop())) {
+        top = top - height;
+     }
+
+     if(this.cfg.beforeShow) {
+        this.cfg.beforeShow.call(this);
+     }
+
+     this.jq.css({
+        'left': left,
+        'top': top,
+        'z-index': ++PrimeFaces.zindex
+     }).show();
+
+     e.preventDefault(); 
+  };
+});
+</script>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Outils" icon="ui-icon-gear">
+						<p:menuitem value="Questionnaire" url="eligibilite.xhtml"/>
+						<p:menuitem value="Paramétrer les scores" url="scoring.xhtml"/>
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+
+					<p:submenu label="Client" icon="ui-icon-gear">
+							<p:menuitem value="Fiche client" url="dossier.xhtml"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+					
+					<p:submenu label="Crédit" icon="ui-icon-gear">
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+						<p:submenu label="Tâche" icon="ui-icon-gear">
+						<p:menuitem value="Mes tâches" url="tache.xhtml"/>
+					</p:submenu>
+
+					<p:menuitem value="Quitter"  actionListener="#{scoringBean.deconnect}"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{scoringBean.loginAndPassword}</p:outputLabel>
+					</f:facet>
+				</p:menubar>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab  title="Simulation">
+					<h:outputText value="Faire une simulation"/>
+				</p:tab>
+				<p:tab title="Score">
+					<h:outputText value="Paramétrer un score"/>
+				</p:tab>
+				<p:tab title="Crédit">
+					<h:outputText value="Simuler un crédit"/>
+				</p:tab>
+				<p:tab title="Tâches">
+					<h:outputText value="Mes tâches"/>
+				</p:tab>
+				<p:tab title="Tableau de bord">
+					<h:outputText value="Mes tableaux de bord"/>
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+        <h:form style="height:170px;width:900px;">
+           <p:dataTable id="search" var="credit" 
+					value="#{scoringBean.listCredit}" rowKey="#{credit.nom}"  selectionMode="single"  emptyMessage="Tableau vide">
+					<p:ajax event="rowDblselect" listener="#{scoringBean.onRowDblClckCreditSelect}"/>
+		  <f:facet name="header">
+            Mes tâches
+           </f:facet>		
+		<p:column headerText="Nom">  
+            #{credit.nom} 
+        </p:column>
+        <p:column headerText="Prenom">  
+            #{credit.prenom} 
+        </p:column>
+        <p:column headerText="Montant">  
+            #{credit.montant} 
+        </p:column>
+          <p:column headerText="Mensualité">  
+            #{credit.mensualite} 
+        </p:column>
+        <p:column headerText="Statut">  
+            #{credit.statut} 
+        </p:column>
+        <p:column headerText="Date">  
+            #{credit.date} 
+        </p:column>
+        <p:column headerText="Envoyé par">  
+          #{credit.envoyerPar} 
+        </p:column>
+        </p:dataTable>
+        <p:spacer height="30"></p:spacer>
+        <p:commandButton  value="Traiter ce dossier" styleClass="submitButton"/>
+           </h:form>
+	</p:layoutUnit>	
+	</p:layout>
+</h:body>
+
+</html>

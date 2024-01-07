@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+</style>
+<script type="text/javascript">
+var currentEvent;
+  $(document).ready(function() {
+  PrimeFaces.widget.ContextMenu.prototype.show = function(e) {
+     //hide other contextmenus if any
+     $(document.body).children('.ui-contextmenu:visible').hide();
+
+     if(e) {
+        currentEvent = e;
+     } 
+
+     var win = $(window),
+     left = e.pageX,
+     top = e.pageY,
+     width = this.jq.outerWidth(),
+     height = this.jq.outerHeight();
+
+     //collision detection for window boundaries
+     if((left + width) > (win.width())+ win.scrollLeft()) {
+        left = left - width;
+     }
+     if((top + height ) > (win.height() + win.scrollTop())) {
+        top = top - height;
+     }
+
+     if(this.cfg.beforeShow) {
+        this.cfg.beforeShow.call(this);
+     }
+
+     this.jq.css({
+        'left': left,
+        'top': top,
+        'z-index': ++PrimeFaces.zindex
+     }).show();
+
+     e.preventDefault(); 
+  };
+});
+</script>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Outils" icon="ui-icon-gear">
+						<p:menuitem value="Tableau de bord" url="accueilBis.xhtml"/>
+					</p:submenu>
+
+					<p:submenu label="Simulation" icon="ui-icon-gear">
+							<p:menuitem value="Simuler le solde" url="accueilBis.xhtml"
+								icon="ui-icon-disk" update="messages" />
+								<p:menuitem value="Solde futur" url="accueilBis.xhtml"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+
+					<p:menuitem value="Quitter" outcome="deconnexion"  actionListener="#{depenseCouranteBean.deconnect}"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{depenseCouranteBean.loginAndPassword}</p:outputLabel>
+					</f:facet>
+				</p:menubar>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab title="Simulation">
+					<h:outputText value="Faire une simulation"/>
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+		<h:form id="init" >
+		 <p:growl id="msgs" showDetail="true"/>
+		  <br></br>
+		  <h:outputText value="Filtrer par mois  "/>  
+         <h:selectOneListbox value="#{depenseCouranteBean.selectedMonth}" size="1" valueChangeListener="#{depenseCouranteBean.selectOneMenuListener}" onchange="submit()">
+            <f:selectItem itemLabel="" itemValue="Vide" />
+            <f:selectItem itemLabel="Janvier" itemValue="janvier" />
+            <f:selectItem itemLabel="Février" itemValue="fevrier" />
+            <f:selectItem itemLabel="Mars" itemValue="mars" />
+            <f:selectItem itemLabel="Avril" itemValue="avril" />
+            <f:selectItem itemLabel="Mai" itemValue="mai" />
+            <f:selectItem itemLabel="Juin" itemValue="juin" />
+             <f:selectItem itemLabel="Juillet" itemValue="juillet" />
+             <f:selectItem itemLabel="Août" itemValue="aout" />
+             <f:selectItem itemLabel="Septembre" itemValue="septembre" />
+             <f:selectItem itemLabel="Octobre" itemValue="octobre" />
+             <f:selectItem itemLabel="Novembre" itemValue="novembre" />
+             <f:selectItem itemLabel="Decembre" itemValue="decembre" />
+         </h:selectOneListbox>
+          <br></br>
+		  <br></br>
+			<h:form id="currentForm" title="test" style="height:230px;width:750px;">
+	<p:contextMenu for="dep1">
+        <p:menuitem value="Supprimer" update="dep1"	 icon="ui-icon-close" actionListener="#{depenseCouranteBean.deleteRevenuordepense}"/>
+    </p:contextMenu>
+       <p:dataTable id="dep1" var="depense" rowStyleClass="#{depense.color}"
+					value="#{depenseCouranteBean.listDepenseOrRevenuMoisCurrent}" editable="true"  editMode="cell" scrollable="true" scrollHeight="150" sortBy="date" rowKey="#{depense.libelle}" selectionMode="single" selection="#{depenseCouranteBean.selectedRevenuordepense}"  emptyMessage="Tableau vide">
+					<p:ajax event="rowEdit" listener="#{depenseCouranteBean.onRowEdit}" update=":init:currentForm:dep1"/>
+                    <p:ajax event="rowEditCancel" listener="#{depenseCouranteBean.onRowCancel}" update=":init:currentForm:dep1"/>
+                    <p:ajax event="cellEdit" listener="#{depenseCouranteBean.onCellEdit}" update=":init:currentForm:dep1,:solde"/>
+                    <p:ajax event="rowDblselect" listener="#{depenseCouranteBean.onRowDblClckSelect}" update=":init:currentForm:dep1,:solde"/>
+		  <f:facet name="header">
+            #{depenseCouranteBean.initHeader()}
+           </f:facet>		
+		<p:column width="10">  
+            <p:graphicImage value="#{depense.image}">
+             </p:graphicImage>
+        </p:column>
+		<p:column headerText="Libellé">  
+            #{depense.libelle} 
+        </p:column>
+		<p:column headerText="Type">  
+            #{depenseCouranteBean.formateType(depense.type)}
+        </p:column>
+        
+        <p:column headerText="Nature">  
+            #{depenseCouranteBean.formateNature(depense.type)}
+        </p:column>
+      
+         <p:column headerText="Montant" style="width:25%">  
+            <p:cellEditor>  
+               <f:facet name="output">  
+                  <h:outputText value="#{depense.montant}" />  
+               </f:facet>  
+               <f:facet name="input">  
+                  <p:inputText id="modelInput" value="#{depense.montant}"  
+                     style="width:96%"/>  
+               </f:facet>  
+            </p:cellEditor>  
+         </p:column> 
+         
+         
+        <p:column headerText="Date">  
+            #{depenseCouranteBean.formaterDate(depense.date)} 
+        </p:column>
+        <p:column headerText="Solde">  
+           #{depenseCouranteBean.computeSolde(depense)}  
+        </p:column>
+	</p:dataTable>
+	
+	<p:confirmDialog id="confirmDialog"
+            message="Are you sure about destroying the world?"
+            header="Initiating destroy process" severity="alert"
+            widgetVar="confirmation">
+
+
+            <h:panelGrid id="display" columns="2" cellpadding="4"
+                style="margin:0 auto;">
+
+                <h:outputText value="Suppression :" />
+
+                <p:commandButton id="confirm" value="Yes Sure"
+                    oncomplete="confirmation.hide()"
+                    actionListener="#{depenseCouranteBean.deleteRevenuordepense}"
+                    update=":init">
+                </p:commandButton>
+            </h:panelGrid>
+
+            <p:commandButton id="decline" value="Not Yet"
+                onclick="confirmation.hide()" type="button" />
+        </p:confirmDialog>
+	
+	</h:form>
+	<br></br>
+    </h:form>
+        <h:form id="solde">
+    <p:spacer height="5" width="930"></p:spacer>
+    <span style="color:red"><strong>Solde : #{depenseCouranteBean.initSoldeMoisCourant()} Euros</strong></span>
+    </h:form>
+    <br></br>
+        <br></br>
+    <h:form>
+    <p:commandButton id="submitButton" actionListener="#{depenseCouranteBean.ajouter}" update=":form2:outPanel" value="+ Ajouter">
+    </p:commandButton>
+    </h:form>
+      <br></br>
+        <br></br>
+			<h:form id="form1">
+				<p:messages id="contactMessage" showDetail="true" autoUpdate="true"
+					closable="true" />
+			</h:form>
+	<h:form id="form2">
+    <p:panel id="outPanel"  widgetVar="outpanel" closable="true" toggleable="true" visible="#{depenseCouranteBean.seePanel}" >
+    <h:panelGrid columns="14" cellpadding="5" bgcolor="white" width="300">  
+        <h:outputText value="Libellé:*" />  
+        <p:inputText id="libelle" required="true" value="#{depenseCouranteBean.libelle}" requiredMessage="Veuillez saisir le nom"/>  
+<!--         <p:message id="libelleMessage" for="libelle" />   -->
+  
+        <h:outputText value="Montant:*" />  
+        <p:inputText id="debit" required="true" value="#{depenseCouranteBean.montant}" requiredMessage="Veuillez saisir le prenom"/>  
+<!--         <p:message id="debitMessage1" for="debit"/> -->
+         <h:outputText value="Type*" />  
+         <h:selectOneListbox value="#{depenseCouranteBean.type}" requiredMessage="Veuillez saisir le type" size="1">
+            <f:selectItem itemLabel="" itemValue="Vide" />
+            <f:selectItem itemLabel="Dép récurrente" itemValue="DEPREC" />
+            <f:selectItem itemLabel="Dép exceptionnel" itemValue="DEPEXC" />
+            <f:selectItem itemLabel="Rev réccurent" itemValue="REVREC" />
+            <f:selectItem itemLabel="Rev exceptionnel" itemValue="REVEXC" />
+         </h:selectOneListbox>
+<!--         <p:selectOneListbox id="type" required="true" value="#{depenseCouranteBean.type}" requiredMessage="Veuillez saisir le prenom"> -->
+<!--             <f:selectItem itemLabel="" itemValue="Vide" /> -->
+<!--             <f:selectItem itemLabel="Dép récurrente" itemValue="DEPREC" /> -->
+<!--             <f:selectItem itemLabel="Dép exceptionnel" itemValue="DEPEXC" /> -->
+<!--             <f:selectItem itemLabel="Rev réccurent" itemValue="REVREC" /> -->
+<!--             <f:selectItem itemLabel="Rev exceptionnel" itemValue="REVEXC" /> -->
+<!--         </p:selectOneListbox>   -->
+<!--         <p:message id="debitMessage" for="debit"/> -->
+        <h:outputText value="Date:*" />  
+        <p:calendar id="dateValeur" value="#{depenseCouranteBean.date}" required="true" pattern="MM/dd/yyyy HH:mm:ss" requiredMessage="Veuillez saisir la date" />
+<!--         <p:message id="dateValeurMessage" for="dateValeur"/> -->
+        <p:commandButton value="Save" icon="ui-icon-star" actionListener="#{depenseCouranteBean.createDepenseOrRevenu}" update=":form2,:init,:solde">
+    </p:commandButton>
+    </h:panelGrid>
+    </p:panel>
+    </h:form>
+	</p:layoutUnit>	
+	</p:layout>
+
+</h:body>
+
+</html>

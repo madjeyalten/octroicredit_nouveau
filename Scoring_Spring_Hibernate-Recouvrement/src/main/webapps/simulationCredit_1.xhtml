@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+
+#conteneur{
+ height: 400px;
+ width: 3000px;
+ margin: auto;
+}
+#bloc_1{
+ height: 30px;
+ width: 350px;
+ position: relative;
+ float: left;
+}
+#bloc_2{
+ height: 30px;
+ width: 600px;
+ position: relative;
+ float: left;
+}
+
+</style>
+<script type="text/javascript">
+var currentEvent;
+  $(document).ready(function() {
+  PrimeFaces.widget.ContextMenu.prototype.show = function(e) {
+     //hide other contextmenus if any
+     $(document.body).children('.ui-contextmenu:visible').hide();
+
+     if(e) {
+        currentEvent = e;
+     } 
+
+     var win = $(window),
+     left = e.pageX,
+     top = e.pageY,
+     width = this.jq.outerWidth(),
+     height = this.jq.outerHeight();
+
+     //collision detection for window boundaries
+     if((left + width) > (win.width())+ win.scrollLeft()) {
+        left = left - width;
+     }
+     if((top + height ) > (win.height() + win.scrollTop())) {
+        top = top - height;
+     }
+
+     if(this.cfg.beforeShow) {
+        this.cfg.beforeShow.call(this);
+     }
+
+     this.jq.css({
+        'left': left,
+        'top': top,
+        'z-index': ++PrimeFaces.zindex
+     }).show();
+
+     e.preventDefault(); 
+  };
+});
+</script>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Outils" icon="ui-icon-gear">
+						<p:menuitem value="Questionnaire" url="eligibilite.xhtml"/>
+						<p:menuitem value="Paramétrer les scores" url="scoring.xhtml"/>
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+
+					<p:submenu label="Client" icon="ui-icon-gear">
+							<p:menuitem value="Fiche client" url="dossier.xhtml"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+					
+					<p:submenu label="Crédit" icon="ui-icon-gear">
+						<p:menuitem value="Simuler un crédit" url="simulationCredit.xhtml"/>
+					</p:submenu>
+						<p:submenu label="Tâche" icon="ui-icon-gear">
+						<p:menuitem value="Mes tâches" url="tache.xhtml"/>
+					</p:submenu>
+
+					<p:menuitem value="Quitter"  actionListener="#{scoringBean.deconnect}"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{scoringBean.loginAndPassword}</p:outputLabel>
+					</f:facet>
+				</p:menubar>
+			</h:form>
+		</p:layoutUnit>
+
+<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab  title="Simulation">
+					<h:outputText value="Faire une simulation"/>
+				</p:tab>
+				<p:tab title="Score">
+					<h:outputText value="Paramétrer un score"/>
+				</p:tab>
+				<p:tab title="Crédit">
+					<h:outputText value="Simuler un crédit"/>
+				</p:tab>
+				<p:tab title="Tâches">
+					<h:outputText value="Mes tâches"/>
+				</p:tab>
+				<p:tab title="Tableau de bord">
+					<h:outputText value="Mes tableaux de bord"/>
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+		
+		<h:form id="simulation" style="height:750px;width:965px;">
+                 
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+            <p:panel  header="Simulation du crédit">
+                <h:panelGrid columns="6" columnClasses="label, value">
+                    <h:outputText value="Emprunteur:" />
+                    <h:outputLabel>#{scoringBean.getNomAndPrenom()}</h:outputLabel>
+                    <p:spacer width="20"></p:spacer>
+                    <p:spacer width="20"></p:spacer>
+                    <h:outputText value="Segmentation:" />
+                    <h:outputText value="Moyenne gamme" />
+                    <h:outputText value="Agence:" />
+                    <h:outputText value="TEST BANK:" />
+                    <p:spacer width="20"></p:spacer>
+                    <p:spacer width="20"></p:spacer>
+                     <h:outputText value="Etat du dossier:" />
+                    <h:outputText value="Pré-instruction" />
+                    <h:outputText value="Initiateur:" />
+                    <h:outputLabel>#{scoringBean.getUserName()}</h:outputLabel>
+                    <p:spacer width="20"></p:spacer>
+                    <p:spacer width="20"></p:spacer>
+                    <h:outputText value="Mensualité maximum :" />
+                    <h:outputText value="50.000 FCFA" />
+                </h:panelGrid>
+                <p:spacer title="espace" height="30"></p:spacer>
+              
+<!--                 Partie simulation -->
+                <div id="conteneur">
+                <div id="bloc_1">
+                <h:panelGrid>
+                 <h:outputText style="font-weight:bold;text-decoration:underline" value="Simulation du plan de financement"> </h:outputText>
+                </h:panelGrid>
+                <p:spacer title="espace" height="30"></p:spacer>
+                 <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Capital (en FCFA): *" />
+                    <p:inputText  value="#{scoringBean.capital}" required="true" requiredMessage="Veuillez saisir le capital" label="Nom" style="text-align: right;"/>
+                    <h:outputText value="Taux (annuel): *" />
+                    <p:spinner id="step" value="#{scoringBean.taux}" stepFactor="0.25" required="true" requiredMessage="Veuillez saisir le taux"/>
+ 
+                    <h:outputText value="Nombre de mois	: " />
+                    <p:spinner  id="minMax" value="#{scoringBean.nbreMois}" min="0" max="100" />
+                    
+                    
+                     <h:outputText value="Mensualité: " />
+                    <p:inputText value="#{scoringBean.mensualiteOutput}" readonly="true"  requiredMessage="Veuillez saisir la commune de naissance" label="Commune" style="text-align: right;"/>
+                    <h:outputText value="Coût total: " />
+                    <p:inputText  value="#{scoringBean.coutTotalOutput}" readonly="true" requiredMessage="Veuillez saisir la situation familiale" label="Situation" style="text-align: right;"/>
+                      <h:outputText value="Frais/Commissions" />
+                    <h:selectBooleanCheckbox/>
+                      <h:outputText value="Assurance emprunteur" />
+                    <h:selectBooleanCheckbox/>
+                </h:panelGrid>
+<!--                      Deuxieme panelGrid -->
+                 <p:spacer title="espace" width="150" height="30"></p:spacer>
+                 <p:commandButton  value="Calculer" action="#{scoringBean.computeSimulation}" styleClass="submitButton" update=":simulation"/>
+                 </div>
+                 <div id="bloc_2">
+                    <p:dataTable id="armotissementTable" var="amortissement" 
+					value="#{scoringBean.listArmotissementBean}" rendered="#{scoringBean.showAmortissement}" rows="12" paginator="true" rowKey="#{client.nom}"  emptyMessage="Tableau vide">
+					<p:ajax event="rowDblselect" listener="#{scoringBean.onRowDblClckSelect}"/>
+
+		  <f:facet name="header">
+            Tableau d'amortissement
+           </f:facet>		
+		<p:column headerText="Mois">  
+            #{amortissement.mois} 
+        </p:column>
+        <p:column headerText="Intérêt">  
+            #{amortissement.interet} 
+        </p:column>
+         <p:column headerText="Remboursement">  
+            #{amortissement.remboursement} 
+        </p:column>
+        <p:column headerText="Capital">  
+            #{amortissement.capital} 
+        </p:column>
+        </p:dataTable>
+        </div>
+        </div>
+        </p:panel>
+             <br></br>
+            <p:commandButton  value="Afficher le tableau d'amortissement" action="#{scoringBean.afficheAmortissement}" styleClass="submitButton" update=":simulation"/>
+            <p:commandButton  value="Accorder le crédit" action="#{scoringBean.accorderCredit}" styleClass="submitButton" update=":simulation"/>
+            <p:commandButton  value="Abandonner" action="#{scoringBean.abandonner}" styleClass="submitButton" update=":simulation"/>
+      <p:splitButton value="Envoyer vers" icon="ui-icon-disk">
+        <p:menuitem value="Confirmer l'envoi" action="#{scoringBean.envoyerVers}" icon="ui-icon-arrowrefresh-1-w" />
+    </p:splitButton>
+            <p:spacer width="10"></p:spacer>
+        <p:autoComplete id="userAutoComplete" value="#{scoringBean.autocompleteUser}" completeMethod="#{scoringBean.completeUser}" size="25"
+                        var="user" itemLabel="#{user.nomAndPrenom}" itemValue="#{user}" converter="userConverter" forceSelection="true">
+            <p:column>
+                <p:graphicImage id="photo" value="user.png"/>
+            </p:column>
+ 
+            <p:column>
+                <h:outputText value="#{user.nomAndPrenom}" />
+            </p:column>
+        </p:autoComplete>
+            <br></br>	
+       </h:form>
+       <p:spacer height="50"></p:spacer>
+       <h:form style="height:20px;width:900px;"></h:form>
+	</p:layoutUnit>	
+	</p:layout>
+</h:body>
+
+</html>

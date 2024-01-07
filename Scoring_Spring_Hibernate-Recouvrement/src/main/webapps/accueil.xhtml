@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+</style>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Depense" icon="ui-icon-document">
+						<p:menuitem value="Reccurente" url="pages/newDepenseCourante.xhtml" icon="ui-icon-search" />
+						<p:menuitem value="Exceptionnelle" url="pages/newDepenseException.xhtml" icon="ui-icon-newwin" />
+						<p:separator />
+						<p:menuitem value="Quit" url="#" />
+					</p:submenu>
+
+					<p:submenu label="Revenu" icon="ui-icon-pencil">
+						<p:menuitem value="Reccurent" url="pages/newRevenuCourante.xhtml"
+							icon="ui-icon-arrowreturnthick-1-w" />
+						<p:menuitem value="Exceptionnel" url="pages/newRevenuException.xhtml"
+							icon="ui-icon-arrowreturnthick-1-e" />
+					</p:submenu>
+
+					<p:submenu label="Outils" icon="ui-icon-help">
+						<p:menuitem value="Tableau de bord" url="pages/accueil.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="Simulation" icon="ui-icon-gear">
+							<p:menuitem value="Simuler le solde" actionListener="#{menuBean.save}"
+								icon="ui-icon-disk" update="messages" />
+								<p:menuitem value="Solde futur" actionListener="#{menuBean.save}"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+
+					<p:menuitem value="Quit" outcome="deconnexion"  actionListener="#{depenseCouranteBean.deconnect}"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{depenseCouranteBean.loginAndPassword}</p:outputLabel>
+					</f:facet>
+				</p:menubar>
+				<p:commandButton type="button" value="Déconnexion" actionListener="#{depenseCouranteBean.deconnect}" icon="ui-icon-extlink"/>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab title="Simulation">
+					<h:outputText value="Faire une simulation" />
+				</p:tab>
+
+				<p:tab title="Dépense récurrente">
+					<h:outputText value="Créer une dépense récurrente" />
+				</p:tab>
+
+				<p:tab title="Dépense exceptionnelle">
+					<h:outputText value="Créer une dépense exceptionnelle" />
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+		<h:form id="init" >
+		 <p:growl id="msgs" showDetail="true"/>
+			<p:carousel  numVisible="1" itemStyle="height:230px;width:750px;" effect="easeInStrong" value="#{depenseCouranteBean.initCarroussel}" headerText="#{depenseCouranteBean.initCarroussel}" style="margin-bottom:0">
+			<h:form id="testTable" title="test">
+       <p:dataTable id="dep1" var="depense" rowStyleClass="#{depense.color}"
+					value="#{depenseCouranteBean.listDepenseOrRevenuMoisCurrent}" editable="true"  editMode="cell" scrollable="true" scrollHeight="150" sortBy="date">
+					<p:ajax event="rowEdit" listener="#{depenseCouranteBean.onRowEdit}" update="dep1" />
+                    <p:ajax event="rowEditCancel" listener="#{depenseCouranteBean.onRowCancel}" update="dep1" />
+                    <p:ajax event="cellEdit" listener="#{depenseCouranteBean.onCellEdit}" update="dep1" />
+ 
+		  <f:facet name="header">
+            Juillet
+           </f:facet>		
+		<p:column width="10">  
+            <p:graphicImage value="#{depense.image}">
+             </p:graphicImage>
+        </p:column>
+		<p:column headerText="Libellé">  
+            #{depense.libelle} 
+        </p:column>
+		<p:column headerText="Type">  
+            #{depenseCouranteBean.formateType(depense.type)}
+        </p:column>
+        
+        <p:column headerText="Nature">  
+            #{depenseCouranteBean.formateNature(depense.type)}
+        </p:column>
+      
+         <p:column headerText="Montant" style="width:25%">  
+            <p:cellEditor>  
+               <f:facet name="output">  
+                  <h:outputText value="#{depense.montant}" />  
+               </f:facet>  
+               <f:facet name="input">  
+                  <p:inputText id="modelInput" value="#{depense.montant}"  
+                     style="width:96%"/>  
+               </f:facet>  
+            </p:cellEditor>  
+         </p:column> 
+         
+         
+        <p:column headerText="Date">  
+            #{depenseCouranteBean.formaterDate(depense.date)} 
+        </p:column>
+        <p:column headerText="Solde">  
+           #{depenseCouranteBean.computeSolde(depense)}  
+        </p:column>
+	</p:dataTable>
+<br></br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="color:red"><strong>Solde : #{depenseCouranteBean.initSolde()} Euros</strong></span>
+    
+	</h:form>
+	<h:form>
+        <p:dataTable id="dep2" var="depense" 
+					value="#{depenseCouranteBean.listDepenseOrRevenuMoisSuivant}" editable="true"  editMode="cell" scrollable="true" scrollHeight="150">
+					 <f:facet name="header">
+                    Août
+                  </f:facet>
+		<p:column width="10">  
+            <p:graphicImage value="#{depense.image}">
+             </p:graphicImage>
+        </p:column>
+		<p:column headerText="Libellé">  
+            #{depense.libelle} 
+        </p:column>
+		<p:column headerText="Type">  
+            #{depenseCouranteBean.formateType(depense.type)}
+        </p:column>
+        
+        <p:column headerText="Nature">  
+            #{depenseCouranteBean.formateNature(depense.type)}
+        </p:column>
+
+		<p:column headerText="Montant">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    #{depense.montant}
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{depense.montant}"/>  
+                </f:facet>  
+            </p:cellEditor> 
+        </p:column>
+        <p:column headerText="Date">  
+            #{depenseCouranteBean.formaterDate(depense.date)} 
+        </p:column>
+        <p:column headerText="Solde">  
+           #{depenseCouranteBean.computeSoldeMoisSuivant(depense)}  
+        </p:column>
+       <p:ajax event="cellEdit" listener="#{depenseCouranteBean.onCellEdit}"/>
+	</p:dataTable>
+	<br></br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="color:red"><strong>Solde : #{depenseCouranteBean.initSoldeMoisSuivant()} Euros</strong></span>
+	</h:form>
+	<h:form>
+      <p:dataTable id="dep3" var="depense" 
+					value="#{depenseCouranteBean.listDepenseOrRevenuMoisApres}" editable="true"  editMode="cell" scrollable="true" scrollHeight="150">
+					<p:ajax event="cellEdit" listener="#{depenseCouranteBean.onCellEdit}"/>
+					 <f:facet name="header">
+                     Septembre
+                     </f:facet>
+		<p:column width="10">  
+            <p:graphicImage value="#{depense.image}">
+             </p:graphicImage>
+        </p:column>
+		<p:column headerText="Libellé">  
+            #{depense.libelle} 
+        </p:column>
+		<p:column headerText="Type">  
+            #{depenseCouranteBean.formateType(depense.type)}
+        </p:column>
+        
+        <p:column headerText="Nature">  
+            #{depenseCouranteBean.formateNature(depense.type)}
+        </p:column>
+
+		<p:column headerText="Montant">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    #{depense.montant}
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{depense.montant}"/>  
+                </f:facet>  
+            </p:cellEditor> 
+        </p:column>
+        <p:column headerText="Date">  
+            #{depenseCouranteBean.formaterDate(depense.date)} 
+        </p:column>
+        <p:column headerText="Solde">  
+           #{depenseCouranteBean.computeSoldeMoisApres(depense)}  
+        </p:column>
+	</p:dataTable>
+	<br></br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="color:red"><strong>Solde : #{depenseCouranteBean.initSoldeMoisApres()} Euros</strong></span>
+ 
+	</h:form>
+    </p:carousel>
+    </h:form>
+    <br></br>
+        <br></br>
+    <h:form>
+    <p:commandButton id="submitButton" actionListener="#{depenseCouranteBean.ajouter}" update=":form2:outPanel" value="+ Ajouter">
+    </p:commandButton>
+    </h:form>
+      <br></br>
+        <br></br>
+			<h:form id="form1">
+				<p:messages id="contactMessage" showDetail="true" autoUpdate="true"
+					closable="true" />
+			</h:form>
+	<h:form id="form2">
+    <p:panel id="outPanel"  widgetVar="outpanel" closable="true" toggleable="true" visible="#{depenseCouranteBean.seePanel}">
+    <p:panelGrid columns="14">
+        <h:outputText value="Libellé:*" />  
+        <p:inputText id="libelle" required="true" value="#{depenseCouranteBean.libelle}" requiredMessage="Veuillez saisir le nom"/>  
+        <p:message id="libelleMessage" for="libelle" />  
+  
+        <h:outputText value="Montant:*" />  
+        <p:inputText id="debit" required="true" value="#{depenseCouranteBean.montant}" requiredMessage="Veuillez saisir le prenom"/>  
+        <p:message id="debitMessage1" for="debit"/>
+         <h:outputText value="Type*" />  
+        <p:selectOneListbox id="type" required="true" value="#{depenseCouranteBean.type}" requiredMessage="Veuillez saisir le prenom">
+            <f:selectItem itemLabel="Dép récurrente" itemValue="DEPREC" />
+            <f:selectItem itemLabel="Dép exceptionnel" itemValue="DEPEXC" />
+            <f:selectItem itemLabel="Rev réccurent" itemValue="REVREC" />
+            <f:selectItem itemLabel="Rev exceptionnel" itemValue="REVEXC" />
+        </p:selectOneListbox>  
+        <p:message id="debitMessage" for="debit"/>
+        <h:outputText value="Date:*" />  
+        <p:calendar id="dateValeur" value="#{depenseCouranteBean.date}" required="true" pattern="MM/dd/yyyy HH:mm:ss" requiredMessage="Veuillez saisir la date" />
+        <p:message id="dateValeurMessage" for="dateValeur"/>
+        <p:commandButton value="Save" icon="ui-icon-star" actionListener="#{depenseCouranteBean.createDepenseOrRevenu}" update=":form2,:init">
+    </p:commandButton>
+    </p:panelGrid>
+    </p:panel>
+    </h:form>
+	</p:layoutUnit>	
+	</p:layout>
+
+</h:body>
+
+</html>

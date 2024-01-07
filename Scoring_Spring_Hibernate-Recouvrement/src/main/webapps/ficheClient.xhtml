@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+</style>
+<script type="text/javascript">
+var currentEvent;
+  $(document).ready(function() {
+  PrimeFaces.widget.ContextMenu.prototype.show = function(e) {
+     //hide other contextmenus if any
+     $(document.body).children('.ui-contextmenu:visible').hide();
+
+     if(e) {
+        currentEvent = e;
+     } 
+
+     var win = $(window),
+     left = e.pageX,
+     top = e.pageY,
+     width = this.jq.outerWidth(),
+     height = this.jq.outerHeight();
+
+     //collision detection for window boundaries
+     if((left + width) > (win.width())+ win.scrollLeft()) {
+        left = left - width;
+     }
+     if((top + height ) > (win.height() + win.scrollTop())) {
+        top = top - height;
+     }
+
+     if(this.cfg.beforeShow) {
+        this.cfg.beforeShow.call(this);
+     }
+
+     this.jq.css({
+        'left': left,
+        'top': top,
+        'z-index': ++PrimeFaces.zindex
+     }).show();
+
+     e.preventDefault(); 
+  };
+});
+</script>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="100">
+
+			<h:form>
+				<p:growl id="messages" />
+				<p:menubar>
+					<p:submenu label="Outils" icon="ui-icon-gear">
+						<p:menuitem value="Questionnaire" url="eligibilite.xhtml"/>
+					</p:submenu>
+
+					<p:submenu label="Simulation" icon="ui-icon-gear">
+							<p:menuitem value="Simuler le solde" url="accueilBis.xhtml"
+								icon="ui-icon-disk" update="messages" />
+								<p:menuitem value="Solde futur" url="accueilBis.xhtml"
+								icon="ui-icon-disk" update="messages" />
+					</p:submenu>
+
+					<p:menuitem value="Quitter" outcome="deconnexion"  actionListener="#{depenseCouranteBean.deconnect}"
+						icon="ui-icon-close" />
+
+					<f:facet name="options">
+						<p:outputLabel>#{depenseCouranteBean.loginAndPassword}</p:outputLabel>
+					</f:facet>
+				</p:menubar>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="left" position="west" size="200" resizable="true"
+			closable="true" collapsible="true" header="Options" minSize="200">
+			<p:accordionPanel>
+				<p:tab title="Simulation">
+					<h:outputText value="Faire une simulation"/>
+				</p:tab>
+			</p:accordionPanel>
+		</p:layoutUnit>
+
+		<p:layoutUnit id="center" position="center">
+		<h:form id="init" >
+		 <p:growl id="msgs" showDetail="true"/>
+		  <br></br>
+		 
+			<h:form id="currentForm" title="test" style="height:230px;width:750px;">
+       <p:dataTable id="score" var="eligibilite" 
+					value="#{scoringBean.listEligibilite}" editable="true" editingRow="true" editMode="cell" scrollable="true" scrollHeight="150" rowKey="#{eligibilite.question}" selectionMode="single"  emptyMessage="Tableau vide">
+		  <f:facet name="header">
+            Questionnaire d'éligibilité
+           </f:facet>		
+		<p:column headerText="Question">  
+            #{eligibilite.question} 
+        </p:column>
+
+      
+         <p:column headerText="Réponse" style="width:20">  
+            <p:cellEditor>  
+               <f:facet name="output">  
+                  <h:outputText value="#{scoringBean.valeurListeDeroulante}"/>  
+               </f:facet>  
+               <f:facet name="input">  
+         <h:selectOneListbox value="#{scoringBean.listEligibilite}" valueChangeListener="#{scoringBean.initListeDeroulante}"   requiredMessage="Veuillez saisir le type" size="1">
+            <f:selectItem itemLabel="" itemValue="Vide" />
+            <f:selectItem itemLabel="Oui" itemValue="DEPREC" />
+            <f:selectItem itemLabel="Non" itemValue="DEPEXC" />
+         </h:selectOneListbox>
+               </f:facet>  
+            </p:cellEditor>  
+         </p:column> 
+
+	</p:dataTable>
+	</h:form>
+	<br></br>
+   <h:form>
+   <p:commandButton value="Valider" icon="ui-icon-star">
+    </p:commandButton>
+    </h:form>
+    </h:form>
+	</p:layoutUnit>	
+	</p:layout>
+
+</h:body>
+
+</html>

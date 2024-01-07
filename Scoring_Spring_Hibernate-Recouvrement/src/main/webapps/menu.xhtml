@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <div class="app-bar black pb-2 pt-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <table width="100%">
+                        <tr>
+                            <td width="50">
+                                <img src="assets/images/OC LOGO.png" width="100%" class="rounded-circle primary-background" alt="logo" />
+                            </td>
+                            <td class="pt-2 pl-2">
+                                <div class="white-text" style="position: absolute; margin-top: 2px;">
+                                    <span class="h3">OCTROI DE CREDIT</span>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <span class="white-text"><i class="icofont-user"></i> #{scoringBean.getUserName()}</span>
+                                <a href="index.xhtml" class="btn btn-white red-text z-depth-0 btn-sm mr-0 mb-0 mt-0 ml-3" style="border-radius: 0;">
+                                    <b>Déconnexion</b>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sub-menu primary-background mt-2 p-2">
+        <a href="scoring.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+            Paraméter les scores
+        </a>
+        <a href="seuilscore.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+            Paraméter les seuils
+        </a>
+        <a href="assuranceCommissions.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+            Assurances / Commissions
+        </a>
+        <a href="suiviemprunt.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+            Suivi des emprunts
+        </a>
+        <a href="recherche.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+            Recherche client
+        </a>
+        <a href="tache.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 mr-2 mt-0 mb-0 ml-0 unbordered-button">
+            Mes tâches
+        </a>
+        <a href="index.xhtml" class="btn btn-white btn-sm pl-3 pr-3 z-depth-0 float-right mr-0 mt-0 mb-0 unbordered-button">
+            Quitter
+        </a>
+    </div>
+    
+</html>

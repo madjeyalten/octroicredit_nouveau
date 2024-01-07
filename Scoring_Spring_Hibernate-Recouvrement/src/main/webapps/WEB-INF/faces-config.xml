@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+  	
+  	<!-- JSF and Spring are integrated -->
+  	<application>
+    	<el-resolver>
+    		org.springframework.web.jsf.el.SpringBeanFacesELResolver
+    	</el-resolver>
+  	</application>
+  	
+  		<converter>
+    <converter-id>userConverter</converter-id>
+    <converter-class>com.otv.converter.UserConverter</converter-class>
+</converter>
+
+ 		<converter>
+    <converter-id>produitConverter</converter-id>
+    <converter-class>com.otv.converter.ProduitConverter</converter-class>
+</converter>
+
+	<converter>
+    <converter-id>garantieConverter</converter-id>
+    <converter-class>com.otv.converter.GarantieConverter</converter-class>
+</converter>
+
+	<converter>
+    <converter-id>intervenantConverter</converter-id>
+    <converter-class>com.otv.converter.IntervenantConverter</converter-class>
+</converter>
+
+<converter>
+    <converter-id>tiersPayeurConverter</converter-id>
+    <converter-class>com.otv.converter.TiersPayeurConverter</converter-class>
+</converter>
+	
+	<!-- configuration of navigation rules -->	
+	<navigation-rule>
+	    <from-view-id>index.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>connect</from-outcome>
+            <to-view-id>eligibilite.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+	        <from-outcome>error</from-outcome>
+            <to-view-id>eligibilite.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    	<navigation-rule>
+	    <from-view-id>index.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>connect</from-outcome>
+            <to-view-id>eligibilite.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+	        <from-outcome>error</from-outcome>
+            <to-view-id>eligibilite.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+        	<navigation-rule>
+	    <from-view-id>eligibilite.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>eligibilite</from-outcome>
+            <to-view-id>recherche.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+	    <from-view-id>dashboard.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>newDepenseCourante</from-outcome>
+            <to-view-id>newDepenseCourante.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+	    <from-view-id>index.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>newDepenseCourante</from-outcome>
+            <to-view-id>newDepenseCourante.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+         <navigation-rule>
+	    <from-view-id>*</from-view-id> 
+	   <navigation-case>
+	        <from-outcome>deconnexion</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+             <navigation-rule>
+	    <from-view-id>*</from-view-id> 
+	   <navigation-case>
+	        <from-outcome>eligibilite</from-outcome>
+            <to-view-id>recherche.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+                 <navigation-rule>
+	    <from-view-id>*</from-view-id> 
+	   <navigation-case>
+	        <from-outcome>createUser</from-outcome>
+            <to-view-id>createUser.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+             <navigation-rule>
+	    <from-view-id>/pages/newDepenseCourante.xhtml</from-view-id> 
+	   <navigation-case>
+	        <from-outcome>deconnexion</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+</faces-config>

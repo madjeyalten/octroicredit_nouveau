@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+</style>
+ <script type="text/javascript">  
+
+
+        $ = jQuery
+        $(function(){
+            $('input').keydown(function(e){
+                if (e.keyCode == 13) {
+                    $('#signUpFrm').rechercher();
+                    return false;
+                }
+            });
+        });
+
+
+    </script>  
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="50">
+
+			
+			<p:tabMenu activeIndex="0">
+				<p:menuitem value="Simulation"  outcome="simulation"
+					icon="ui-icon-star" />
+				<p:menuitem value="Total des balances" outcome="total"
+					icon="ui-icon-person" />
+			</p:tabMenu>
+		</p:layoutUnit>
+
+		
+
+		<p:layoutUnit id="center" position="center">
+			<h1 class="title ui-widget-header ui-corner-all">Total des
+				comptes</h1>
+			<h:form id="form3">
+				<h:inputText id="enterId" onkeyup="#{balanceBean.filter()}" value="#{balanceBean.propertyName}"/>
+				<h:outputLabel></h:outputLabel>
+				<p:commandButton value="Rechercher" id="submit"
+					actionListener="#{balanceBean.rechercher}" immediate="true" update=":formTable"/>
+			</h:form>
+			<br></br>
+			<br></br>
+			<h:form id="formTable">
+
+				<p:dataTable id="bal" var="balance" value="#{balanceBean.listTotal}"
+					paginator="true" rows="9">
+<p:ajax event="rowToggle" listener="#{balanceBean.onRowToggle}" update=":formTable:bal" /> 
+ <p:column style="width:2%">  
+            <p:rowToggler />  
+        </p:column>   
+					<p:column headerText="Compte">  
+            #{balance.id.compte} 
+        </p:column>
+
+					<p:column headerText="Intitulé">  
+            #{balance.id.intitule} 
+        </p:column>
+
+					<p:column headerText="Débit Report">  
+            #{balance.id.debitReport} 
+        </p:column>
+
+					<p:column headerText="Crédit Report">  
+            #{balance.id.creditReport} 
+        </p:column>
+
+					<p:column headerText="Débit mouvement">  
+            #{balance.id.debitMouvement} 
+        </p:column>
+
+					<p:column headerText="Crédit mouvement">  
+            #{balance.id.creditMovement} 
+        </p:column>
+
+					<p:column headerText="Débit Solde">  
+            #{balance.id.debitSolde} 
+        </p:column>
+
+					<p:column headerText="Crédit Solde">  
+            #{balance.id.creditSolde} 
+        </p:column>
+        <p:rowExpansion> 
+        <br></br>
+<p:dataTable id="bal2" var="balance" value="#{balanceBean.listTotalLike}"
+					paginator="false" rows="8">
+
+					<p:column headerText="Compte">  
+            #{balance.id.compte} 
+        </p:column>
+
+					<p:column headerText="Intitulé">  
+            #{balance.id.intitule} 
+        </p:column>
+
+					<p:column headerText="Débit Report">  
+            #{balance.id.debitReport} 
+        </p:column>
+
+					<p:column headerText="Crédit Report">  
+            #{balance.id.creditReport} 
+        </p:column>
+
+					<p:column headerText="Débit mouvement">  
+            #{balance.id.debitMouvement} 
+        </p:column>
+
+					<p:column headerText="Crédit mouvement">  
+            #{balance.id.creditMovement} 
+        </p:column>
+
+					<p:column headerText="Débit Solde">  
+            #{balance.id.debitSolde} 
+        </p:column>
+
+					<p:column headerText="Crédit Solde">  
+            #{balance.id.creditSolde} 
+        </p:column>
+
+				</p:dataTable>
+  </p:rowExpansion> 
+
+				</p:dataTable> 
+			</h:form>
+
+
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+
+</html>

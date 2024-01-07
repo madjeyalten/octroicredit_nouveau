@@ -1,0 +1,296 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style type="text/css">
+	
+	.ui-messages-info-detail, .ui-messages-warn-detail, .ui-messages-error-detail, .ui-messages-fatal-detail, .ui-message-info-detail, .ui-message-warn-detail, .ui-message-error-detail, .ui-message-fatal-detail {
+  font-size: 14px !important;
+}
+
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-panel-title{
+    background: #0085cc;
+    color: white;
+    font-size: 12px;
+}
+
+.ui-dialog-titlebar {
+    background: #0085cc;
+    color: white;
+    font-size: 12px;
+}
+
+    .split .ui-button .ui-button-text {
+    display: block;
+    line-height: normal;
+    height: 30px;
+}
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+</style>
+<title>Octroi de crédit</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+
+<link rel="stylesheet" href="assets/mdb/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="assets/mdb/css/mdb.min.css" />
+<link rel="stylesheet" href="assets/css/icofont/icofont.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+
+
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<!-- <script type="text/javascript" src="js/switcher.js"></script> -->
+<!-- <script type="text/javascript" src="js/toggle.js"></script> -->
+<!-- <script type="text/javascript" src="js/ui.core.js"></script> -->
+<!-- <script type="text/javascript" src="js/ui.tabs.js"></script> -->
+<!-- <script type="text/javascript"> -->
+<!-- 	$(document).ready(function(){ -->
+<!-- 		$(".tabs > ul").tabs(); -->
+<!-- 	}); -->
+<!-- 	</script> -->
+	
+</h:head>
+
+    <body>
+
+      <div class="p-2">
+          
+        <ui:include src="menu.xhtml"></ui:include>
+
+        <div class="side-bar p-2">
+            <div class="container-fluid p-0">
+            
+                <div class="row">
+                    <div class="col-3 pr-1">
+                        <div class="white-text text-center primary-background pt-2 pr-2" style="height: 40px;">
+                            <i class="icofont-user-alt-3" style="font-size: 20px;"></i>
+                            <small style="margin-top: 5px; margin-left: -7px;" class="float-right">
+                                <i class="icofont-plus"></i>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-8 pr-2 pl-0">
+                        <div class="pl-2 primary-background white-text">
+    
+                        <a href="dossier.xhtml" class="white-text">
+                            <div class="pt-2" style="height: 40px;">
+                                Nouveau client
+                            </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-11 pr-2">
+                        <div class="mt-1">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #FF0000;" class="white-text text-center pt-1 pb-1">
+                                            Paramétrages
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                            Utilisateurs
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                            Mes tâches
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="pt-1">
+                                    <td>
+                                        <div style="background-color: #68a8a5;" class="white-text text-center pt-1 pb-1 mt-1">
+                                            Instruction demande
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                            <li>
+                                                <a href="">
+                                                    Scoring
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    Simulation
+                                                </a>
+                                            </li>
+                                            <li>
+                                            <a href="">
+                                                Edition de contrat
+                                            </a>
+                                        </li>
+                                        <li>
+                                                    <a href="creditapprouve.xhtml">
+                                                        Décaisser les fonds
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="creditdecaisse.xhtml">
+                                                        Annuler un décaissement
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1">
+                                            Notification
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                            <li>
+                                                <a href="">
+                                                    Envoi courrier
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    Envoi mail
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    Envoi SMS
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="wrap-content p-2">
+            <div class="title">
+                <h3 style="background-color: #707173;" class="white-text p-1">
+                    Historique du crédit
+                </h3>
+            </div><br />
+
+            <h:form id="simulation" style="width:965px;">        
+                <p:growl id="growl" sticky="true" showDetail="true"/>
+                <p:panel><br />
+                    <h:panelGrid columns="6" cellspacing="6" columnClasses="label, value">
+                        <h:outputText style="font-size: 14px;" value="Nom emprunteur:" />
+                        <p:inputText value="#{scoringBean.selectedCredit.nom}" disabled="true" styleClass="mb-1" style="border-radius: 0; padding: 7px; width: 100%;"></p:inputText>
+                        <p:spacer width="20"></p:spacer>
+                        <h:outputText style="font-size: 14px;" value="Prenom emprunteur:" styleClass="label"/>
+                        <p:inputText value="#{scoringBean.selectedCredit.prenom}" disabled="true" styleClass="mb-1" style="border-radius: 0; padding: 7px; width: 100%;"></p:inputText>
+                        <p:spacer width="20"></p:spacer>
+                        <h:outputText style="font-size: 14px;" value="Montant du crédit:" />
+                        <p:inputText value="#{scoringBean.selectedCredit.montant}" disabled="true" styleClass="mb-1" style="border-radius: 0; padding: 7px; width: 100%;"></p:inputText>
+                        <p:spacer width="20"></p:spacer>
+                        <h:outputText style="font-size: 14px;" value="Mensualité:" styleClass="label"/>
+                        <p:inputText value="#{scoringBean.selectedCredit.mensualite}" disabled="true" styleClass="mb-1" style="border-radius: 0; padding: 7px; width: 100%;"></p:inputText>
+                        <p:spacer width="20"></p:spacer>
+                        <h:outputText style="font-size: 14px;" value="Commentaire:" />
+                        <h:inputTextarea value="#{scoringBean.commentaire}" style="height:100px;width:400px;font-size: 14px;"></h:inputTextarea>
+                        <p:spacer width="20"></p:spacer>
+                    </h:panelGrid>
+                    <p:spacer title="espace" height="30"></p:spacer>
+                
+                </p:panel>
+                <br></br>
+                <p:commandButton  value="Approuver" action="#{scoringBean.approuverCredit}"  style="background: #47a447;" styleClass="btn btn-sm ml-0 white-text">
+                <p:confirm message="Confirmez-vous l'approbation de ce dossier?"></p:confirm>
+                </p:commandButton>
+                <p:spacer title="espace" width="10"></p:spacer>
+                <p:commandButton  value="Valider" action="#{scoringBean.validerCredit}" style="background: #47a447;" styleClass="btn btn-sm ml-0 white-text" update=":simulation"/>
+                <p:spacer title="espace" width="10"></p:spacer>
+                <p:commandButton  value="Refuser" action="#{scoringBean.refuserCredit}" style="background: #cc0516;" styleClass="btn btn-sm ml-0 white-text" update=":simulation"/>
+                <p:spacer title="espace" width="10"></p:spacer>
+                <p:commandButton value="Historique" rendered="#{not empty scoringBean.listHistorique}" style="background: #e96208;" styleClass="btn btn-sm ml-0 white-text" action="#{scoringBean.showHistorique}" oncomplete="PF('historiqueDialog').show()" />
+                <p:spacer title="espace" width="10"></p:spacer>      
+                <p:splitButton value="Envoyer vers" icon="ui-icon-check" styleClass="split">
+                    <p:menuitem value="Confirmer l'envoi" action="#{scoringBean.envoyerVers}" icon="ui-icon-check" styleClass="pl-3 pr-3 pt-2 pb-2" />
+                </p:splitButton>
+                <p:spacer width="10"></p:spacer>
+            
+                 <p:autoComplete id="userAutoComplete" value="#{scoringBean.autocompleteUser}" completeMethod="#{scoringBean.completeUser}" size="25" style="font-size: 14px;"
+                        var="user" itemLabel="#{user.nomAndPrenom}" itemValue="#{user}" converter="userConverter" forceSelection="true">
+            <p:column>
+                <p:graphicImage id="photo" value="user.png"/>
+            </p:column>
+ 
+            <p:column>
+                <h:outputText value="#{user.nomAndPrenom}" />
+            </p:column>
+        </p:autoComplete>	
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+    
+            </h:form>
+
+            <p:dialog header="Historique" widgetVar="historiqueDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="440" height="290">
+                <h:form title="Historique"> 
+                    <ui:repeat value="#{scoringBean.listHistorique}" var="historique">
+                        <h:panelGrid columns="2" style="width:100%;"  columnClasses="logo,detail">
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="10"> 
+                                    <h:outputText style="font-size: 14px;" value="Date" />
+                                    <h:outputText value="#{historique.date}" style="font-size: 14px;">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                    <h:outputText style="font-size: 14px;" value="Statut" />
+                                    <span class="#{scoringBean.getStatutStyleHistorique(historique.statut)}">#{historique.statut}</span>
+                                    <h:outputText style="font-size: 14px;" value="Auteur" />
+                                    <h:outputText value="#{historique.envoyerPar}"  style="font-size: 14px;"/>
+                    
+                                    <h:outputText style="font-size: 14px;" value="Commentaire" rendered="#{historique.commentaire!=null}"/>
+                                    <h:outputText value="#{historique.commentaire}"  style="font-size: 14px;"/>
+                                </h:panelGrid>
+                            </p:outputPanel>
+                            <br></br>
+                        </h:panelGrid>
+                        <hr />
+                    </ui:repeat>
+                </h:form>
+            </p:dialog> 
+        </div>
+      </div>
+
+    </body>
+</html>

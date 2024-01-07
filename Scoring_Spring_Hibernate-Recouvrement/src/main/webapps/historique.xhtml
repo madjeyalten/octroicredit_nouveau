@@ -1,0 +1,169 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+</style>
+<title>Octroi de crédit</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<script type="text/javascript" src="js/switcher.js"></script>
+<script type="text/javascript" src="js/toggle.js"></script>
+<script type="text/javascript" src="js/ui.core.js"></script>
+<script type="text/javascript" src="js/ui.tabs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".tabs > ul").tabs();
+	});
+	</script>
+	
+</h:head>
+
+<body>
+<div id="main">
+  <!-- Tray -->
+  <div id="tray" class="box">
+    <p class="f-left box">
+      <!-- Switcher -->
+       <span class="f-left" id="switcher"> <a href="javascript:void(0);" rel="1col" class="styleswitch ico-col1" title="Display one column"></a> <a href="javascript:void(0)" rel="2col" class="styleswitch ico-col2" title="Display two columns"></a> </span><strong>Octroi de crédit</strong> </p>
+   <p class="f-right">Utilisateur : <strong><a href="#">#{scoringBean.getUserName()}</a></strong> <strong><a href="index.xhtml" id="logout">Déconnexion</a></strong></p>
+  </div>
+  <!--  /tray -->
+  <hr class="noscreen" />
+  <!-- Menu -->
+  <div id="menu" class="box">
+    <ul class="box">
+      <li id="menu-active"><a href="scoring.xhtml"><span>Paramétrer les scores</span></a></li>
+      <!-- Active -->
+      <li><a href="seuilscore.xhtml"><span>Paramétrer les seuils</span></a></li>
+      <li><a href="assuranceCommissions.xhtml"><span>Assurances/Commissions</span></a></li>
+      <li><a href="dossier.xhtml"><span>Fiche Client</span></a>
+      </li>
+      <li><a href="recherche.xhtml"><span>Recherche Client</span></a></li>
+      <li><a href="tache.xhtml"><span>Mes Tâches</span></a></li>
+      <li><a href="index.xhtml"><span>Quitter</span></a></li>
+    </ul>
+  </div>
+  <!-- /header -->
+  <hr class="noscreen" />
+  <!-- Columns -->
+  <div id="cols" class="box">
+    <!-- Aside (Left Column) -->
+    <div id="aside" class="box">
+      <div class="padding box">
+        <!-- Logo (Max. width = 200px) -->
+        <p id="logo"><a href="#"><img src="tmp/logo.gif" alt="" /></a></p>
+        <!-- Search -->
+        <!-- Create a new project -->
+        <p id="btn-create" class="box"><a href="#"><span>Nouveau client</span></a></p>
+      </div>
+      <!-- /padding -->
+      <ul class="box">
+        <li><a href="#">Paramétrage</a></li>
+        <li><a href="#">Utilisateur</a></li>
+        <li><a href="#">Mes tâches</a></li>
+        <li id="submenu-active"><a href="#">Historique</a>
+          <!-- Active -->
+          <ul>
+            <li><a href="#">Scoring</a></li>
+            <li><a href="#">Simulation</a></li>
+            <li><a href="suiviemprunt.xhtml">Suivi emprunt</a></li>
+            <li><a href="#">Edition du contrat</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Notification</a>
+          <ul>
+            <li><a href="#">Envoi courrier</a></li>
+            <li><a href="#">Envoi mail</a></li>
+            <li><a href="#">Envoi SMS</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /aside -->
+    <hr class="noscreen" />
+    <!-- Content (Right Column) -->
+    <div id="content" class="box">
+      <h3 class="tit">Historique client</h3>
+      
+       <h:form title="Historique"> 
+       <p:spacer height="30"></p:spacer>
+        
+        
+         <ui:repeat value="#{scoringBean.listHistorique}" var="historique">
+        <h:panelGrid columns="2" style="width:100%;"  columnClasses="logo,detail">
+ 
+            <p:outputPanel>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText style="font-size: 12px;" value="Nom emprêteur:" />
+                    <h:outputText value="#{historique.nom}"  style="font-size: 12px;"/>
+ 
+                    <h:outputText style="font-size: 12px;" value="Prenom emprêteur:" />
+                    <h:outputText value= "#{historique.prenom}"  style="font-size: 12px;"/>
+ 
+                    <h:outputText style="font-size: 12px;" value="Montant:" />
+                    <h:outputText value="#{historique.montant}"  style="font-size: 12px;"/>
+                    
+                     <h:outputText style="font-size: 12px;" value="Mensualité:" />
+                    <h:outputText value="#{historique.mensualite}"  style="font-size: 12px;"/>
+                    
+                     <h:outputText style="font-size: 12px;" value="Statut:" />
+                    <h:outputText value="#{historique.statut}"  style="font-size: 12px;"/>
+                    
+                     <h:outputText style="font-size: 12px;" value="Date" />
+                            <h:outputText value="#{historique.date}" style="font-size: 12px;">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    
+                     <h:outputText style="font-size: 12px;" value="Auteur" />
+                    <h:outputText value="#{historique.envoyerPar}"  style="font-size: 12px;"/>
+                    
+                    <h:outputText style="font-size: 12px;" value="Commentaire" />
+                    <h:outputText value="#{historique.commentaire}"  style="font-size: 12px;"/>
+                </h:panelGrid>
+            </p:outputPanel>
+            <br></br>
+        </h:panelGrid>
+        <hr />
+    </ui:repeat>
+    
+    
+           </h:form>
+    </div>
+    <!-- /content -->
+  </div>
+  <!-- /cols -->
+  <hr class="noscreen" />
+  <!-- Footer -->
+  <div id="footer" class="box">
+    <p class="f-right">Développé par <a href="#">Fingiciel</a></p>
+  </div>
+  <!-- /footer -->
+</div>
+<!-- /main -->
+</body>
+</html>

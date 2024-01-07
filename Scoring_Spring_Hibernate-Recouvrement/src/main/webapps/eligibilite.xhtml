@@ -1,0 +1,365 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+</style>
+<title>Octroi de crédit</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<link rel="stylesheet" href="assets/mdb/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="assets/mdb/css/mdb.min.css" />
+<link rel="stylesheet" href="assets/css/icofont/icofont.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+<!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+<!-- <script type="text/javascript" src="js/switcher.js"></script> -->
+<!-- <script type="text/javascript" src="js/toggle.js"></script> -->
+<!-- <script type="text/javascript" src="js/ui.core.js"></script> -->
+<!-- <script type="text/javascript" src="js/ui.tabs.js"></script> -->
+<!-- <script type="text/javascript"> -->
+<!-- 	$(document).ready(function(){ -->
+<!-- 		$(".tabs > ul").tabs(); -->
+<!-- 	}); -->
+<!-- 	</script> -->
+
+</h:head>
+
+<body>
+    <div class="p-2">
+        
+        <ui:include src="menu.xhtml"></ui:include>
+
+        <div class="side-bar p-2">
+            <div class="container-fluid p-0">
+              
+                <div class="row">
+                    <div class="col-3 pr-1">
+                        <div class="white-text text-center primary-background pt-2 pr-2" style="height: 40px;">
+                            <i class="icofont-user-alt-3" style="font-size: 20px;"></i>
+                            <small style="margin-top: 5px; margin-left: -7px;" class="float-right">
+                                <i class="icofont-plus"></i>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-8 pr-2 pl-0">
+                        <div class="pl-2 primary-background white-text">
+      
+                          <a href="dossier.xhtml" class="white-text">
+                              <div class="pt-2" style="height: 40px;">
+                                  Nouveau client
+                              </div>
+                          </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-11 pr-2">
+                        <div class="mt-1">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #FF0000;" class="white-text text-center pt-1 pb-1">
+                                            Paramétrages
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                            Utilisateurs
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="tache.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Mes tâches
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="produit.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Produits
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="garantie.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Garantie
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="tierspayeur.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Tiers payeur
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="intervenantpret.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Intervenants
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="pt-1">
+                                    <td>
+                                        <a href="eligibilite.xhtml">
+                                            <div style="background-color: #68a8a5;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Éligibilité
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                            <li>
+                                                <a href="seuilscore.xhtml">
+                                                    Seuil de scores
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="simulationCredit.xhtml">
+                                                    Simulation
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    Octroi
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    Edition de contrat
+                                                </a>
+                                            </li>
+                                            <li>
+                                                    <a href="creditapprouve.xhtml">
+                                                        Décaisser les fonds
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="creditdecaisse.xhtml">
+                                                        Annuler un décaissement
+                                                    </a>
+                                                </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1">
+                                            Notification
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                            <li>
+                                                <a href="">
+                                                    Envoi courrier
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    Envoi mail
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="">
+                                                    Envoi SMS
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="wrap-content p-2">
+            <div class="title">
+                <h3 style="background-color: #707173;" class="white-text p-1">
+                    Questions d'éligibilité
+                </h3>
+            </div><br />
+
+            <h:form id="eligibilite" style="width:70%;">
+
+                <p:messages id="contactMessage" showDetail="true" autoUpdate="true"
+                closable="true" />
+            
+                <div class="section-cover p-4 m-2">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <b class="font-weight-bold text-muted black-text">
+                                    Avez-vous des crédits en cours ?
+                                </b>
+                            </td>
+                            <td class="pl-3 pt-1" width="100">
+                                <div class="form-group mb-0">
+                                    <h:selectOneListbox value="#{scoringBean.credit}" size="1" styleClass="custom-select font-size-14 white-text primary-background" style="border-radius: 0; border: none; height: 30px;">
+                                        <f:selectItem itemLabel="Sélectionnez" itemValue="Vide" />
+                                        <f:selectItem itemLabel="Oui" itemValue="Oui" />
+                                        <f:selectItem itemLabel="Non" itemValue="Oui" />
+                                    </h:selectOneListbox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="font-weight-bold text-muted black-text">
+                                    Exercez-vous une activité professionelle ?
+                                </b>
+                            </td>
+                            <td class="pl-3 pt-1">
+                                <div class="form-group mb-0">
+                                    <h:selectOneListbox value="#{scoringBean.activitePro}" size="1" styleClass="custom-select font-size-14 white-text primary-background" style="border-radius: 0; border: none; height: 30px;">
+                                        <f:selectItem itemLabel="Sélectionnez" itemValue="Vide" />
+                                        <f:selectItem itemLabel="Oui" itemValue="Oui" />
+                                        <f:selectItem itemLabel="Non" itemValue="Non" />
+                                  </h:selectOneListbox>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <b class="font-weight-bold text-muted black-text">
+                                    Avez-vous plus d'une année d'ancienneté dans votre entreprise actuelle ?
+                                </b>
+                            </td>
+                            <td class="pl-3 pt-1">
+                                <div class="form-group mb-0">
+                                    <h:selectOneListbox  size="1" styleClass="custom-select font-size-14 white-text primary-background" style="border-radius: 0; border: none; height: 30px;">
+                                        <f:selectItem itemLabel="Sélectionnez" itemValue="Vide" />
+                                        <f:selectItem itemLabel="Oui" itemValue="Oui" />
+                                        <f:selectItem itemLabel="Non" itemValue="Non" />
+                                  </h:selectOneListbox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="font-weight-bold text-muted black-text">
+                                    Etes-vous résident togolais ?
+                                </b>
+                            </td>
+                            <td class="pl-3 pt-1">
+                                <div class="form-group mb-0">
+                                    <h:selectOneListbox  size="1" styleClass="custom-select font-size-14 white-text primary-background" style="border-radius: 0; border: none; height: 30px;">
+                                        <f:selectItem itemLabel="Sélectionnez" itemValue="Vide" />
+                                        <f:selectItem itemLabel="Oui" itemValue="Oui" />
+                                        <f:selectItem itemLabel="Non" itemValue="Non" />
+                                  </h:selectOneListbox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="font-weight-bold text-muted black-text">
+                                    Avez-vous un co-emprunteur ou une caution solidaire ?
+                                </b>
+                            </td>
+                            <td class="pl-3 pt-1">
+                                <div class="form-group mb-0">
+                                    <h:selectOneListbox value="#{scoringBean.caution}" size="1" styleClass="custom-select font-size-14 white-text primary-background" style="border-radius: 0; border: none; height: 30px;">
+                                        <f:selectItem itemLabel="Sélectionnez" itemValue="Vide" />
+                                        <f:selectItem itemLabel="Oui" itemValue="Oui" />
+                                        <f:selectItem itemLabel="Non" itemValue="Non" />
+                                    </h:selectOneListbox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="font-weight-bold text-muted black-text">
+                                    Combien de fois avez-vous fait une demande de crédit cette année ?
+                                </b>
+                            </td>
+                            <td class="pl-3 pt-1">
+                                <div class="form-group mb-0">
+                                    <h:selectOneListbox value="#{scoringBean.demandeCredit}" size="1" styleClass="custom-select font-size-14 white-text primary-background" style="border-radius: 0; border: none; height: 30px;">
+                                        <f:selectItem itemLabel="Sélectionnez" itemValue="Vide" />
+                                        <f:selectItem itemLabel="Une fois" itemValue="Une" />
+                                        <f:selectItem itemLabel="Deux fois" itemValue="Deux" />
+                                    </h:selectOneListbox>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b class="font-weight-bold text-muted black-text">
+                                    Avez-vous déjà eu des impayés ou rejets ?
+                                </b>
+                            </td>
+                            <td class="pl-3 pt-1">
+                                <div class="form-group mb-0">
+                                    <h:selectOneListbox value="#{scoringBean.impaye}" size="1" styleClass="custom-select font-size-14 white-text primary-background" style="border-radius: 0; border: none; height: 30px;">
+                                        <f:selectItem itemLabel="Sélectionnez" itemValue="Vide" />
+                                        <f:selectItem itemLabel="Oui" itemValue="Oui" />
+                                        <f:selectItem itemLabel="Non" itemValue="Non" />
+                                    </h:selectOneListbox> 
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <p:commandButton value="Valider" actionListener="#{scoringBean.validerEligibilite}" styleClass="btn btn-red btn-sm pl-3 pr-3 unbordered-button z-depth-0">
+                    </p:commandButton>
+                </div>
+            </h:form>
+        </div>
+    </div>
+    
+    <script src="assets/mdb/js/jquery.min.js"></script>
+    <script src="assets/mdb/js/popper.min.js"></script>
+    <script src="assets/mdb/js/bootstrap.min.js"></script>
+    <script src="assets/mdb/js/mdb.min.js"></script>
+
+    </body>
+</html>

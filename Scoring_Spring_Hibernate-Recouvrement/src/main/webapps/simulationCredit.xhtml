@@ -1,0 +1,527 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+.ui-autocomplete-input.ui-autocomplete-dd-input {
+    /* padding-right: 2.4em; */
+    width: 170px;
+}
+
+
+.capitalStyle{
+ text-align: right;
+}
+  .split .ui-button .ui-button-text {
+    display: block;
+    line-height: normal;
+    height: 32px;
+    background-color: #555 !important;
+    color: white;
+}
+
+.panelClass{
+max-height: 410px;
+overflow: auto;
+}
+   
+.ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield {
+    /* font-weight: normal; */
+    height: 30px;
+}
+
+
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+
+.ui-panel-title{
+    background: #0085cc;
+    color: white;
+    font-size: 14px;
+}
+
+.ui-panel-titlebar {
+    background: #0085cc;
+    color: white;
+    font-size: 14px;
+}
+
+.ui-datalist-header {
+    background: #555;
+    color: white;
+    font-size: 14px;
+}
+
+.ui-widget-header .ui-state-default {
+background: #0085cc;
+}
+
+.ui-datatable thead th
+{
+background: #68a8a5;
+}
+
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator{
+background: #ccd3d6;
+}
+.buttonClass.ui-button-text{
+    background: #0085cc;
+    color: white;
+    font-size: 14px;
+}
+.ui-menubar {
+	border: 1px solid #aed0ea !important;
+	background: #74b2e2 url(../images/myImage.png) 50% 50% repeat-x
+		!important;
+	color: #ffffff !important;
+	font-weight: bolder !important;
+}
+</style>
+<title>Octroi de crédit</title>
+<!-- <meta http-equiv="content-type" content="text/html; charset=utf-8" /> -->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/2col.css" title="2col" />
+<link rel="alternate stylesheet" media="screen,projection" type="text/css" href="css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="css/mystyle.css" />
+
+<link rel="stylesheet" href="assets/mdb/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="assets/mdb/css/mdb.min.css" />
+<link rel="stylesheet" href="assets/css/icofont/icofont.min.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
+	
+</h:head>
+
+<body>
+    <div id="main">
+
+        <div class="p-2">
+            
+            <ui:include src="menu.xhtml"></ui:include>
+
+            <div class="side-bar p-2">
+                <div class="container-fluid p-0">
+                  
+                    <div class="row">
+                        <div class="col-3 pr-1">
+                            <div class="white-text text-center primary-background pt-2 pr-2" style="height: 40px;">
+                                <i class="icofont-user-alt-3" style="font-size: 20px;"></i>
+                                <small style="margin-top: 5px; margin-left: -7px;" class="float-right">
+                                    <i class="icofont-plus"></i>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-8 pr-2 pl-0">
+                            <div class="pl-2 primary-background white-text">
+          
+                              <a href="dossier.xhtml" class="white-text">
+                                  <div class="pt-2" style="height: 40px;">
+                                      Nouveau client
+                                  </div>
+                              </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-11 pr-2">
+                            <div class="mt-1">
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #FF0000;" class="white-text text-center pt-1 pb-1">
+                                                Paramétrages
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Utilisateurs
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Mes tâches
+                                            </div>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                    <td>
+                                        <a href="produit.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Produits
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="garantie.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Garantie
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="tierspayeur.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Tiers payeur
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="intervenantpret.xhtml">
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Intervenants
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                    <tr class="pt-1">
+                                        <td>
+                                            <div style="background-color: #68a8a5;" class="white-text text-center pt-1 pb-1 mt-1">
+                                                Fiche client
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                                <li>
+                                                    <a href="">
+                                                        Scoring
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Simulation
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                  <a href="">
+                                                      Edition de contrat
+                                                  </a>
+                                              </li>
+                                                <li>
+                                                    <a href="creditapprouve.xhtml">
+                                                        Décaisser les fonds <span class="badge badge-success">#{scoringBean.nombreCreditApprouve}</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="creditdecaisse.xhtml">
+                                                        Annuler un décaissement <span class="badge badge-danger">#{scoringBean.nombreCreditDecaisse}</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="background-color: #707173;" class="white-text text-center pt-1 pb-1">
+                                                Notification
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <ul type="none" class="pl-1 pr-1 side-bar-item-menu">
+                                                <li>
+                                                    <a href="">
+                                                        Envoi courrier
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Envoi mail
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        Envoi SMS
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+            <div class="wrap-content p-2">
+                <div class="title">
+                    <h3 style="background-color: #707173;" class="white-text p-1">
+                        Simulation de crédit
+                    </h3>
+                </div>
+
+                <div class="row">
+           
+                    <div class="col-6">
+               
+                        <h:form id="simulation">
+                            <p:messages id="rechercheMessage" showDetail="true" autoUpdate="true" closable="true" showSummary="false" showIcon="false"/>
+                                
+                            <p:panel>
+                                <h:panelGrid columns="6" columnClasses="label, value">
+                                    <h:outputText style="font-size: 14px;font-weight:bold" value="Emprunteur:" />
+                                    <h:outputLabel style="font-size: 14px;">#{scoringBean.getNomAndPrenom()}</h:outputLabel>
+                                    <p:spacer width="20"></p:spacer>
+                                    <p:spacer width="20"></p:spacer>
+                                    <h:outputText style="font-size: 14px;font-weight:bold" value="Score:" />
+                                    <h:outputLabel style="font-size: 14px; ">#{scoringBean.selectedClient.scoreClient}</h:outputLabel>
+                                    <h:outputText style="font-size: 14px; font-weight:bold" value="Agence:" />
+                                    <h:outputText style="font-size: 14px;" value="TEST BANK:" />
+                                    <p:spacer width="20"></p:spacer>
+                                    <p:spacer width="20"></p:spacer>
+                                    <h:outputText style="font-size: 14px;font-weight:bold" value="Etat du dossier:" />
+                                    <h:outputText style="font-size: 14px;" value="Pré-instruction" />
+                                    <h:outputText style="font-size: 14px;font-weight:bold" value="Initiateur:" />
+                                    <h:outputLabel style="font-size: 14px; ">#{scoringBean.getUserName()}</h:outputLabel>
+                                    <p:spacer width="20"></p:spacer>
+                                    <p:spacer width="20"></p:spacer>
+                                    <h:outputText style="font-size: 14px;font-weight:bold" value="Mensualité maximum :" />
+                                    <h:outputLabel style="font-size: 14px; ">#{scoringBean.getMensualiteMaximum()}</h:outputLabel>
+                                </h:panelGrid>
+                                <p:spacer title="espace" height="30"></p:spacer>
+                             
+                                <h:panelGrid columns="3">
+                                    <h:outputText style="font-weight:bold;font-size: 14px;text-decoration:underline" value="Simulation du plan de financement"> </h:outputText>
+                                </h:panelGrid>
+                                <p:spacer title="espace" height="10"></p:spacer>
+
+                                <h:panelGrid columns="2" cellspacing="8" columnClasses="label, value">
+                                
+                                    <h:outputText style="font-size: 14px;" value="Objet du crédit: *" />
+                                     <p:autoComplete id="produitAutoComplete" dropdown="true" value="#{scoringBean.produitAutocomplete}" completeMethod="#{scoringBean.completeProduit}" style="text-align: right" styleClass="mb-1 ml-3" 
+                        var="produit" itemLabel="#{produit.libelleproduit}" itemValue="#{produit}" converter="produitConverter" forceSelection="true">
+            <p:column>
+                <h:outputText value="#{produit.libelleproduit}" />
+            </p:column>
+            <p:ajax event="itemSelect" listener="#{scoringBean.changeTaux}" update="simulation"/> 
+        </p:autoComplete>
+                                    
+                                    
+                                    <p:spacer width="10"></p:spacer>
+                                    <p:spacer width="10"></p:spacer>
+                                    <h:outputText style="font-size: 14px;" value="Capital (en FCFA): *" />
+                                    <p:inputNumber id="input2" value="#{scoringBean.capital}" required="true"  requiredMessage="Veuillez saisir le capital" inputStyleClass="capitalStyle" label="Nom" style="text-align: left;font-size: 14px;" styleClass="mb-1 ml-3"  symbol=" FCFA" symbolPosition="s"  
+                               decimalSeparator="," thousandSeparator="."> 
+                             </p:inputNumber> 
+                            
+                                    <p:spacer width="10"></p:spacer>
+                                    <p:spacer width="10"></p:spacer>
+                                    <h:outputText style="font-size: 14px;" value="Taux (annuel): *" />
+                                    <p:spinner id="taux" style="font-size: 14px;" value="#{scoringBean.taux}" stepFactor="0.25" required="true" requiredMessage="Veuillez saisir le taux" styleClass="mb-1 ml-3" />
+                                    <p:spacer width="10"></p:spacer>
+                                    <p:spacer width="10"></p:spacer>
+                                    <h:outputText style="font-size: 14px;" value="Nombre de mois	: " />
+                                    <p:spinner  id="minMax" style="font-size: 14px;" value="#{scoringBean.nbreMois}" min="6" max="100" required="true"  requiredMessage="Veuillez renseigner le nombre de mois" styleClass="mb-1 ml-3" />
+                                   <p:spacer width="10"></p:spacer>
+                                    <p:spacer width="10"></p:spacer>
+                                   
+                                    <h:outputText style="font-size: 14px;" value="Mensualité: " />
+                                    <p:inputText value="#{scoringBean.mensualiteOutput}"  readonly="true"  requiredMessage="Veuillez saisir la commune de naissance" label="Commune" style="text-align: right;font-size: 14px;" styleClass="mb-1 ml-3" />
+                                    <p:spacer width="10"></p:spacer>
+                                    <p:spacer width="10"></p:spacer>
+                                    <h:outputText style="font-size: 14px;" value="Coût total hors assurance: " />
+                                    <p:inputText  value="#{scoringBean.coutTotalOutput}"  readonly="true" requiredMessage="Veuillez saisir la situation familiale" label="Situation" style="text-align: right;font-size: 14px;" styleClass="mb-1 ml-3" />
+                                    
+                                    <h:outputText style="font-size: 14px;" value="Commissions" />
+                                    <p:selectBooleanCheckbox value="#{scoringBean.fraisBoolean}" styleClass="ml-3 mb-1">
+                                        <p:ajax update=":synthese" listener="#{scoringBean.checkFrais}" />
+                                   </p:selectBooleanCheckbox>
+                                   
+                                    <h:outputText style="font-size: 14px;" value="Assurance emprunteur" />
+                                    <p:selectBooleanCheckbox value="#{scoringBean.assuranceBoolean}" styleClass="ml-3">
+                                        <p:ajax update=":synthese" listener="#{scoringBean.checkAssurance}" />
+                                    </p:selectBooleanCheckbox>
+                                  
+                                </h:panelGrid>
+               
+                
+                                <p:spacer title="espace" width="150" height="30"></p:spacer>
+                               
+                                <p:commandButton   value="Calculer" action="#{scoringBean.computeSimulation}" style="background: #555;color: #fff;border: none; border-radius: 0;" styleClass="ml-1 pl-3 pr-3 pt-2 pb-2 mt-2" icon="ui-icon-check" update=":simulation,:synthese"/>
+                            </p:panel>
+                            <h:panelGroup rendered="#{scoringBean.showButton()}">
+                            <br></br>                            
+                            <p:commandButton  value="Tableau d'amortissement" action="#{scoringBean.afficheAmortissement}" style="background: #555;color: #fff;border: none; border-radius: 0;" styleClass="ml-0 pl-1 pr-1 pt-2 pb-2 mt-2" update=":tableauAmortissement"/>
+                            <p:spacer width="5"></p:spacer>
+                            <p:commandButton  value="Synthèse du crédit" action="#{scoringBean.afficherSynthese}" style="background: #68a8a5;color: #fff;border: none; border-radius: 0;" styleClass="ml-0 pl-1 pr-1 pt-2 pb-2 mt-2" update=":synthese"/>
+                            <p:spacer width="5"></p:spacer>
+                            <p:commandButton  value="Accorder le crédit" action="#{scoringBean.accorderCredit}" icon="ui-icon-check" disabled="#{!scoringBean.showScoreAccepte}" style="background: #129924;color: #fff;border: none; border-radius: 0;" styleClass="ml-0 pl-1 pr-1 pt-2 pb-2 mt-2" update=":simulation"/>
+                            <p:spacer width="5"></p:spacer>
+
+                            <p:commandButton value="Editer le contrat" ajax="false" icon="ui-icon-document" disabled="#{!scoringBean.showScoreAccepte}" onclick="PrimeFaces.monitorDownload(start, stop)" style=" color: #fff;background: #ed9c28; border: none; border-radius: 0;" styleClass="ml-0 pl-1 pr-1 pt-2 pb-2 mt-2">
+                                <p:fileDownload value="#{scoringBean.editerContratPdf}"/>  
+                            </p:commandButton>
+                           </h:panelGroup>
+                            <br></br>
+                        </h:form>
+
+                    </div>
+                    <div class="col-6">
+                    <h:form id="tableauAmortissement" rendered="#{scoringBean.showAmortissement}">
+                    
+                    <h4 class="tit">Tableau d'amortissement</h4> 
+                    
+                    
+                     <p:dataTable id="armotissementTable" var="amortissement" 
+                           value="#{scoringBean.listArmotissementBean}" rendered="#{scoringBean.showAmortissement}" rows="13" paginator="true" rowKey="#{client.nom}"  emptyMessage="Tableau vide">
+                           <p:ajax event="rowDblselect" listener="#{scoringBean.onRowDblClckSelect}"/>		
+                     <p:column headerText="Mois" style="font-size: 14px;">  
+                             #{amortissement.mois} 
+                         </p:column>
+                         <p:column headerText="Intérêt" style="font-size: 14px;">  
+                             #{amortissement.interet} 
+                         </p:column>
+                          <p:column headerText="Remboursement" style="font-size: 14px;">  
+                             #{amortissement.remboursement} 
+                         </p:column>
+                         <p:column headerText="Capital" style="font-size: 14px;">  
+                             #{amortissement.capital} 
+                         </p:column>
+                         </p:dataTable>
+                         </h:form>
+                         
+                         <!--     Affichage des synthèses -->
+                         <h:form id="synthese" rendered="#{scoringBean.showSynthese}">
+                         <h3 class="tit">Synthèse du crédit</h3>
+                         <p:panel styleClass="panelClass">
+                        <h:panelGrid>
+                                  <h:outputText style="font-weight:bold;font-size: 14px;text-decoration:underline" value="Avant crédit"> </h:outputText>
+                        </h:panelGrid>
+                         <p:panelGrid columns="2" columnClasses="label, value">
+                         <h:outputText style="font-size: 14px;" value="Taux d'endettement :" />
+                         <h:outputLabel style="font-size: 14px;">#{scoringBean.tauxEndettementAvantCredit}</h:outputLabel>
+                         </p:panelGrid>
+                         
+                         <h:panelGrid>
+                         <h:outputText style="font-weight:bold;font-size: 14px;text-decoration:underline" value="Après crédit"> </h:outputText>
+                        </h:panelGrid>
+                         <p:panelGrid columns="2" columnClasses="label, value">
+                         <h:outputText style="font-size: 14px;" value="Taux d'endettement :" />
+                         <h:outputLabel style="font-size: 14px;">#{scoringBean.tauxEndettementApresCredit}</h:outputLabel>
+                         </p:panelGrid>
+                         
+                          <p:panelGrid columns="4" columnClasses="label, value">
+                         <h:outputText style="font-size: 14px;" value="Garantie:" />
+                         <p:autoComplete id="garantieAutoComplete" dropdown="true" value="#{scoringBean.autocompleteGarantie}" completeMethod="#{scoringBean.completeGarantie}" style="text-align: right" styleClass="mb-1 ml-3" 
+                        var="garantie" itemLabel="#{garantie.libellegarantie}" itemValue="#{garantie}" converter="garantieConverter" forceSelection="true">
+            <p:column>
+                <h:outputText value="#{garantie.libellegarantie}" />
+            </p:column>
+        </p:autoComplete>
+        <h:outputText style="font-size: 14px;" value="Tiers payeur:" />
+                         <p:autoComplete id="tierspayeurAutoComplete" dropdown="true" value="#{scoringBean.autocompleteTierspayeur}" completeMethod="#{scoringBean.completeTiersPayeur}" style="text-align: right" styleClass="mb-1 ml-3" 
+                        var="tierspayeur" itemLabel="#{tierspayeur.libelletierspayeur}" itemValue="#{tierspayeur}" converter="tiersPayeurConverter" forceSelection="true">
+            <p:column>
+                <h:outputText value="#{tierspayeur.libelletierspayeur}" />
+            </p:column>
+        </p:autoComplete>
+                         </p:panelGrid>
+                         
+                         <br></br>
+                         <h:panelGrid>
+                         <h:outputText style="font-weight:bold;font-size: 14px;text-decoration:underline" value="Synthèse"> </h:outputText>
+                        </h:panelGrid>
+                         <p:panelGrid columns="4" columnClasses="label, value">
+                         <h:outputText style="font-size: 14px;" value="Montant du crédit :" />
+                         <h:outputLabel style="font-size: 14px;">#{scoringBean.montantCreditToDisplay}</h:outputLabel>
+                         <h:outputText style="font-size: 14px;" value="Echéance :" />
+                         <h:outputLabel style="font-size: 14px;">#{scoringBean.mensualiteOutput}</h:outputLabel>
+                         <h:outputText style="font-size: 14px;" value="Durée du crédit :" />
+                         <h:outputLabel style="font-size: 14px;">#{scoringBean.nbreMois} mois</h:outputLabel>
+                         <h:outputText style="font-size: 14px;" value="Commissions :" />
+                         <h:outputLabel style="font-size: 14px;">#{scoringBean.commissionToDisplay}</h:outputLabel>
+                         <h:outputText style="font-size: 14px;" value="Taux nominal :" />
+                         <h:outputLabel style="font-size: 14px;">#{scoringBean.taux} %</h:outputLabel>
+                         <h:outputText style="font-size: 14px;" value="Assurance :" />
+                         <h:outputLabel style="font-size: 14px;">#{scoringBean.assuranceToDisplay}</h:outputLabel>
+                         
+                         <h:outputText style="font-size: 14px;" value="Coût total du crédit:" />
+                         <h:outputLabel style="font-size: 14px;">#{scoringBean.coutTotalAvecAssuranceEtFraisOutput} </h:outputLabel>
+                         </p:panelGrid>
+                 
+                         <p:column rendered="#{scoringBean.showScoreAccepte}">
+                       <p:graphicImage url="img/approv.png" />
+                     </p:column>
+                     
+                      <p:column rendered="#{scoringBean.showScoreRejete}">
+                       <p:graphicImage url="img/rej.png" />
+                     </p:column>
+                         
+                         <br></br>
+                          <br></br>
+                         
+                 <!--         liste des pièces à présenter -->
+                         
+                        <p:dataList var="piece" value="#{scoringBean.listPiece}" type="definition" >
+                              <f:facet name="header">
+                             Liste des pièces à fournir
+                            </f:facet>
+                     <p:column style="font-size: 14px;">
+                         <h:outputText value="#{piece.label}" style="font-size: 14px;"/>
+                     </p:column>
+                  
+                 </p:dataList>
+                         
+                         </p:panel>
+                         <br></br>
+                         <h:panelGrid>
+                         <h:panelGrid columns="8">
+                         <p:spacer width="10" height="40"></p:spacer>
+                                       <p:splitButton  value="Envoyer vers" icon="ui-icon-check" styleClass="split">
+                         <p:menuitem value="Confirmer l'envoi" action="#{scoringBean.envoyerVersSimulation}" icon="ui-icon-arrowrefresh-1-w" />
+                     </p:splitButton>   
+                     <p:spacer width="1"></p:spacer>
+                     <p:spacer width="10"></p:spacer>
+ 
+ <p:autoComplete id="userAutoComplete" value="#{scoringBean.autocompleteUser}" completeMethod="#{scoringBean.completeUser}" inputStyleClass="form-control"
+                        var="user" itemLabel="#{user.nomAndPrenom}" itemValue="#{user}" converter="userConverter" forceSelection="true">
+            <p:column>
+                <p:graphicImage id="photo" value="user.png"/>
+            </p:column>
+ 
+            <p:column>
+                <h:outputText value="#{user.nomAndPrenom}" />
+            </p:column>
+        </p:autoComplete>
+                         </h:panelGrid>
+                         </h:panelGrid>
+                         
+                         </h:form>
+                    </div>
+              </div>
+               <!--      fin gauche -->
+                   
+               
+               
+               <!--     fin div droite -->
+                   <br></br>
+               
+                    </div>
+                
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,183 @@
+.app-bar {
+    font-family: Jura;
+}
+
+.side-bar {
+    position: absolute;
+    width: 18%;
+    top: 140px;
+    left: 8px;
+    bottom: 0;
+    background-color: #FFF;
+    font-family: Jura;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.primary-background {
+    background-color: #45c1b8;
+}
+
+.primary-text {
+    color: #45c1b8;
+}
+
+.sub-menu {
+    font-family: Jura;
+}
+
+.sub-menu a {
+    color: #26413f;
+    font-weight: bold;
+}
+
+.sub-menu a.item-active {
+    color: #000;
+}
+
+.side-bar-item-menu li {
+    border-bottom: 1px solid #CCC;
+    padding: 5px 0;
+}
+
+.side-bar-item-menu li a {
+    color: #000;
+    font-weight: bold;
+}
+
+.wrap-content {
+    position: absolute;
+    width: 82%;
+    top: 140px;
+    right: 8px;
+    bottom: 0;
+    background-color: #ebebeb;
+    font-family: Jura;
+}
+
+.wrap-content .section-cover {
+    border: 2px solid #AAA;
+}
+
+.wrap-content .section-cover .primary-input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    margin: 3px 0;
+    padding: 8px 10px;
+    width: 100%;
+    border-radius: 0 !important;
+}
+
+.tache-table tbody tr td.td-success {
+    border-left: 6px solid #1c9e1c;
+}
+
+.tache-table tbody tr td.td-warning {
+    border-left: 6px solid #f5c320;
+}
+
+.tache-table tbody tr td.td-danger {
+    border-left: 6px solid #e63535;
+}
+
+.tache-table tbody tr td.td-primary {
+    border-left: 6px solid #1c799e;
+}
+
+.unbordered-button {
+    border-radius: 0 !important;
+}
+
+.cover-login-input {
+    background-color: #FFF;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #BBB;
+}
+
+.cover-login-input .login-input {
+    padding: 7px 5px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+
+.font-size-13 {
+    font-size: 13px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+    
+::-webkit-scrollbar-track  {
+    -webkit-border-radius: 0px;
+    background:#EEE;
+    border-radius: 0px;
+}
+    
+::-webkit-scrollbar-thumb  {
+    -webkit-border-radius: 0px;
+    border-radius: 0;
+    background: #ccc;
+}
+    
+::-webkit-scrollbar-thumb:hover  {
+    background: #AAA;
+}
+    
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #71a7ec;
+}
+
+@font-face {
+    src: url(fonts/Sanchez/Sanchez-Regular.ttf);
+    font-family: Sanchez;
+}
+
+@font-face {
+    src: url(fonts/Recoleta/Recoleta-RegularDEMO.otf);
+    font-family: Recoleta;
+}
+
+@font-face {
+    src: url(fonts/Dosis/static/Dosis-Medium.ttf);
+    font-family: Dosis;
+}
+
+@font-face {
+    src: url(fonts/Gayathri/Gayathri-Regular.ttf);
+    font-family: Gayathri;
+}
+
+@font-face {
+    src: url(fonts/Jura/static/Jura-Medium.ttf);
+    font-family: Jura;
+}
+
+@font-face {
+    src: url(fonts/Marmelad/Marmelad-Regular.ttf);
+    font-family: Marmelad;
+}
+
+
+@font-face {
+    src: url(fonts/Montserrat/Montserrat-Regular.ttf);
+    font-family: Montserrat;
+}
+
+@media(max-width: 720px) {
+    .side-bar .side-bar-header table tr td div{
+        text-align: center;
+    }
+
+    .xs-hide {
+        display: none;
+    }
+}

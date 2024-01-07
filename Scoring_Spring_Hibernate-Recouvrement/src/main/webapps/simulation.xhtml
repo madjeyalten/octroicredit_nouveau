@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 12px !important;
+}
+
+.ui-panelgrid tr,td {
+	border: 0 !important;
+}
+</style>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+
+		<p:layoutUnit id="top" position="north" size="50">
+
+			
+			<p:tabMenu activeIndex="0">
+				<p:menuitem value="Simulation"  outcome="simulation"
+					icon="ui-icon-star" />
+				<p:menuitem value="Total des balances" outcome="total"
+					icon="ui-icon-person" />
+			</p:tabMenu>
+		</p:layoutUnit>
+
+		
+
+		<p:layoutUnit id="center" position="center">
+			<h1 class="title ui-widget-header ui-corner-all">Capacité d'auto financement</h1>
+			<h:form id="form3">
+			   <h:outputLabel> Ratio</h:outputLabel>
+				<h:inputText id="ratioId" value="#{balanceBean.ratio}" />
+			</h:form>
+			<br></br>
+			<br></br>
+			<h:form id="formTable">
+
+				<p:dataTable var="balance" value="#{balanceBean.listTotalRatio}" id="balId" editable="true"  editMode="cell" rows="10" emptyMessage="Aucun total trouvé">  
+  
+         <p:ajax event="cellEdit" listener="#{balanceBean.onCellEdit}" update=":form3:ratioId" />  
+  
+        <p:column headerText="Compte">  
+           <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{balance.id.compte}"/>  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{balance.id.compte}"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+  
+        <p:column headerText="Intitulé">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{balance.id.intitule}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{balance.id.intitule}"/>  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+  
+        <p:column headerText="Débit Report">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value= "#{balance.id.debitReport}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                   <h:inputText value= "#{balance.id.debitReport}" />  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>  
+        
+         <p:column headerText="Crédit Report">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value= "#{balance.id.creditReport}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                   <h:inputText value= "#{balance.id.creditReport}" />  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>
+        
+         <p:column headerText="Débit mouvement">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value= "#{balance.id.debitMouvement}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                   <h:inputText value= "#{balance.id.debitMouvement}" />  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>
+        
+         <p:column headerText="Crédit mouvement">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value= "#{balance.id.creditMovement}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                   <h:inputText value= "#{balance.id.creditMovement}" />  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>
+        
+        <p:column headerText="Débit Solde">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value= "#{balance.id.debitSolde}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                   <h:inputText value= "#{balance.id.debitSolde}" />  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column>
+        
+        <p:column headerText="Crédit Solde">  
+            <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value= "#{balance.id.creditSolde}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                   <h:inputText value= "#{balance.id.creditSolde}" />  
+                </f:facet>  
+            </p:cellEditor>  
+        </p:column> 
+  
+    </p:dataTable>  
+    <br></br>
+    <p:commandButton value="Enregistrer la simulation" id="submit"
+					actionListener="#{balanceBean.saveSimulation}" immediate="true"/>
+			</h:form>
+
+
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+
+</html>
